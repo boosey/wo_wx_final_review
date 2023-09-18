@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum TextFieldId {
-  jobId,
-  jobSummary,
-  skillCategory,
-  skillName,
-  skillDescription,
-}
-
 class Constants {
   static const sectionTitleStyle = TextStyle(
     fontWeight: FontWeight.bold,
@@ -19,6 +11,17 @@ class Constants {
   static const jobTitleStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 24,
+  );
+  static const reviewerStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+  );
+
+  static const skillNameReviewStyle = TextStyle(
+    decoration: TextDecoration.underline,
+  );
+
+  static const skillNameEditStyle = TextStyle(
+    fontWeight: FontWeight.bold,
   );
 
   static const editInputDecoration = InputDecoration(

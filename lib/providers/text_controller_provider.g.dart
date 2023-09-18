@@ -6,7 +6,7 @@ part of 'text_controller_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tecHash() => r'dc6e34f62509ad40d15092a4d2794d2680c08734';
+String _$tecHash() => r'1ae0b493c56dfd49490e5b45ba0b16c9381f2aaf';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -42,14 +42,10 @@ class TecFamily extends Family<TextEditingController> {
 
   /// See also [tec].
   TecProvider call(
-    TextFieldId fieldId, {
-    int i = 0,
-    int j = 0,
-  }) {
+    String fieldId,
+  ) {
     return TecProvider(
       fieldId,
-      i: i,
-      j: j,
     );
   }
 
@@ -59,8 +55,6 @@ class TecFamily extends Family<TextEditingController> {
   ) {
     return call(
       provider.fieldId,
-      i: provider.i,
-      j: provider.j,
     );
   }
 
@@ -83,15 +77,11 @@ class TecFamily extends Family<TextEditingController> {
 class TecProvider extends AutoDisposeProvider<TextEditingController> {
   /// See also [tec].
   TecProvider(
-    this.fieldId, {
-    this.i = 0,
-    this.j = 0,
-  }) : super.internal(
+    this.fieldId,
+  ) : super.internal(
           (ref) => tec(
             ref,
             fieldId,
-            i: i,
-            j: j,
           ),
           from: tecProvider,
           name: r'tecProvider',
@@ -101,24 +91,17 @@ class TecProvider extends AutoDisposeProvider<TextEditingController> {
           allTransitiveDependencies: TecFamily._allTransitiveDependencies,
         );
 
-  final TextFieldId fieldId;
-  final int i;
-  final int j;
+  final String fieldId;
 
   @override
   bool operator ==(Object other) {
-    return other is TecProvider &&
-        other.fieldId == fieldId &&
-        other.i == i &&
-        other.j == j;
+    return other is TecProvider && other.fieldId == fieldId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, fieldId.hashCode);
-    hash = _SystemHash.combine(hash, i.hashCode);
-    hash = _SystemHash.combine(hash, j.hashCode);
 
     return _SystemHash.finish(hash);
   }

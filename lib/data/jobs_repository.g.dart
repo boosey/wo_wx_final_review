@@ -21,7 +21,7 @@ final jobsRepositoryProvider = AutoDisposeProvider<JobsRepository>.internal(
 );
 
 typedef JobsRepositoryRef = AutoDisposeProviderRef<JobsRepository>;
-String _$jobHash() => r'547b913d14e367ff7a0c19fcd5b21f7a2c141b12';
+String _$jobHash() => r'369fdd9ff3e84b4296f0c2775ce4b3a4eb033c6a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,23 +44,23 @@ class _SystemHash {
   }
 }
 
-typedef JobRef = AutoDisposeFutureProviderRef<Job>;
+typedef JobRef = AutoDisposeFutureProviderRef<CloudantDoc>;
 
 /// See also [job].
 @ProviderFor(job)
 const jobProvider = JobFamily();
 
 /// See also [job].
-class JobFamily extends Family<AsyncValue<Job>> {
+class JobFamily extends Family<AsyncValue<CloudantDoc>> {
   /// See also [job].
   const JobFamily();
 
   /// See also [job].
   JobProvider call({
-    required String jobId,
+    required String docId,
   }) {
     return JobProvider(
-      jobId: jobId,
+      docId: docId,
     );
   }
 
@@ -69,7 +69,7 @@ class JobFamily extends Family<AsyncValue<Job>> {
     covariant JobProvider provider,
   ) {
     return call(
-      jobId: provider.jobId,
+      docId: provider.docId,
     );
   }
 
@@ -89,14 +89,14 @@ class JobFamily extends Family<AsyncValue<Job>> {
 }
 
 /// See also [job].
-class JobProvider extends AutoDisposeFutureProvider<Job> {
+class JobProvider extends AutoDisposeFutureProvider<CloudantDoc> {
   /// See also [job].
   JobProvider({
-    required this.jobId,
+    required this.docId,
   }) : super.internal(
           (ref) => job(
             ref,
-            jobId: jobId,
+            docId: docId,
           ),
           from: jobProvider,
           name: r'jobProvider',
@@ -106,17 +106,17 @@ class JobProvider extends AutoDisposeFutureProvider<Job> {
           allTransitiveDependencies: JobFamily._allTransitiveDependencies,
         );
 
-  final String jobId;
+  final String docId;
 
   @override
   bool operator ==(Object other) {
-    return other is JobProvider && other.jobId == jobId;
+    return other is JobProvider && other.docId == docId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, jobId.hashCode);
+    hash = _SystemHash.combine(hash, docId.hashCode);
 
     return _SystemHash.finish(hash);
   }

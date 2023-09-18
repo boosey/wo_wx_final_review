@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 import 'package:wo_wx_final_review/constants.dart';
+import 'package:wo_wx_final_review/data/job.dart';
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
 import 'package:wo_wx_final_review/providers/text_controller_provider.dart';
 
-import 'data/job.dart';
 import 'data/jobs_repository.dart';
 
 class Review extends ConsumerWidget {
@@ -18,7 +18,7 @@ class Review extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final jobDocumentId = ref.watch(jobIdProvider);
-    final job = ref.watch(jobProvider(jobId: jobDocumentId));
+    final job = ref.watch(jobProvider(docId: jobDocumentId));
 
     return job.when(
       data: (j) => SizedBox(
@@ -27,34 +27,26 @@ class Review extends ConsumerWidget {
           padding: const EdgeInsets.all(100),
           child: SignedSpacingColumn(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 20,
+            spacing: 10,
             children: [
-              Text(j.jobTitle, style: Constants.jobTitleStyle),
-              Column(
+              Text(j.input.jobTitle, style: Constants.jobTitleStyle),
+              SignedSpacingColumn(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 10,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(border: Border.all()),
-                      child: ExpansionTile(
-                        title: const Text('Job Description',
-                            style: Constants.sectionTitleStyle),
-                        childrenPadding: const EdgeInsets.all(20),
-                        children: <Widget>[
-                          ListTile(title: Text(j.jobDescription)),
-                        ],
-                      ),
-                    ),
+                  MaterialButton(
+                    onPressed: () {
+                      saveFinalVersion(ref, j);
+                    },
+                    child: const Text("Save Final Version"),
                   ),
-                  sectionWidget(
-                      ref,
-                      TextFieldId.jobSummary,
-                      "Job Summary",
-                      () => j.jobSummary,
-                      j.reviewers.sublist(1),
-                      (reviewer) => reviewer.jobSummary),
-                  skillsSection(ref, j),
+                  jobDescriptionSection(j),
+                  jobSummarySection(ref, j),
+                  const Text("Skills Categories",
+                      style: Constants.sectionTitleStyle),
+                  ...j.versions.finalEdit.skillCategories.map(
+                    (c) => skillCategorySection(ref, j, c),
+                  ),
                 ],
               ),
             ],
@@ -65,223 +57,185 @@ class Review extends ConsumerWidget {
         child: const Text("Loading"),
       ),
       error: (e, s) => Container(
-        child: const Text("Erro"),
+        child: const Text("Error"),
       ),
     );
   }
 
-  Widget skillsSection(
-    WidgetRef ref,
-    Job job,
-  ) {
-    // HACK
-    final skillCategories = List.of([job.skillCategory]);
-    final categorySkillsList = job.skills;
-
-    final categoryWidgets = <Widget>[];
-
-    var i = 0;
-    var j = 0;
-    for (var category in skillCategories) {
-      final catWidget = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Skill Category: $category',
-            style: Constants.sectionTitleStyle,
-          ),
-          ...categorySkillsList.map(
-            (s) => Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(border: Border.all()),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: TextField(
-                              decoration: Constants.editInputDecoration
-                                  .copyWith(labelText: 'Skill'),
-                              controller: ref.read(tecProvider(
-                                TextFieldId.skillName,
-                                i: i,
-                                j: j,
-                              ))!
-                                ..text = s.name),
-                        ),
-                        TextField(
-                            decoration: Constants.editInputDecoration
-                                .copyWith(labelText: 'Description'),
-                            controller: ref.read(tecProvider(
-                              TextFieldId.skillDescription,
-                              i: i,
-                              j: j++,
-                            ))!
-                              ..text = s.description),
-                      ],
+  Future<void> saveFinalVersion(WidgetRef ref, CloudantDoc job) async {
+    final finalVersion = DocumentVersion(
+      id: job.id,
+      submitted: job.versions.finalEdit.submitted,
+      creationTime: job.versions.finalEdit.creationTime,
+      modificationTime: job.versions.finalEdit.modificationTime,
+      jobSummary: ref.read(tecProvider("jobSummary")).text,
+      skillCategories: job.versions.finalEdit.skillCategories
+          .map(
+            (cat) => cat.copyWith(
+              skills: cat.skills
+                  .map(
+                    (s) => s.copyWith(
+                      name: ref.read(tecProvider('${s.id}.skill.name')).text,
+                      description: ref
+                          .read(tecProvider('${s.id}.skill.description'))
+                          .text,
                     ),
-                  ),
-                ),
-              ),
+                  )
+                  .toList(),
             ),
-          ),
-        ],
-      );
-
-      categoryWidgets.add(catWidget);
-      i++;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: categoryWidgets,
-      ),
+          )
+          .toList(),
     );
-
-    // final List<Widget> skillSections = [];
-
-    // for (var r in j.reviewers.sublist(1)) {
-    //   skillSections.add(const Padding(
-    //     padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-    //     child: Text('Job Skills Reviews', style: Constants.sectionTitleStyle),
-    //   ));
-
-    //   // for (var s in r.skills) {
-    //   //           skillSection(ref, r.skillCategory, () => s.description, reviewers, (reviewer) => null);)
-    //   // }
-    // }
-
-    // return Padding(
-    //   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-    //   child: Column(
-    //     children: <Widget>[
-    //       const Text('Job Skills', style: Constants.sectionTitleStyle),
-
-    //       Padding(
-    //         padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-    //         child: Text(j.skillCategory),
-    //       ),
-
-    //       // skillSection(ref, skillName, () => null, reviewers, (reviewer) => null)
-    //     ],
-    //   ),
-    // );
+    await ref.read(jobsRepositoryProvider).submitFinalVersion(
+          id: job.id,
+          submitter: "cassie@delta.com",
+          finalVersion: finalVersion,
+        );
   }
 
-  // Widget skillsCategory(WidgetRef ref, )
+  Widget jobDescriptionSection(CloudantDoc j) {
+    return section("Job Description", () => Text(j.input.jobDescription));
+  }
 
-  // Widget skillSection(
-  //     WidgetRef ref,
-  //     String skillName,
-  //     String Function() editText,
-  //     List<Reviewer> reviewers,
-  //     String Function(Reviewer reviewer) reviewerSkillText) {
-  //   return sectionWidget(
-  //       ref,
-  //       TextFieldId.jobSummary,
-  //       'Skill: $skillName',
-  //       () => editText.call(),
-  //       reviewers.sublist(1),
-  //       (reviewer) => reviewer.jobSummary);
-  // }
+  Widget jobSummarySection(WidgetRef ref, CloudantDoc j) {
+    return section(
+      "Job Summary",
+      () => simpleReviewSection(
+        ref: ref,
+        fieldId: "jobSummary",
+        initialValue: j.versions.finalEdit.jobSummary,
+        reviews: j.collectJobSummaryReviews(),
+      ),
+    );
+  }
 
-  Widget sectionWidget(
-      WidgetRef ref,
-      textFieldId,
-      String title,
-      String Function() sectionEditableText,
-      List<Reviewer> reviewers,
-      String Function(Reviewer reviewer) reviewText) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: DecoratedBox(
-        decoration: BoxDecoration(border: Border.all()),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            sectionEditWidget(
-                ref, textFieldId, title, sectionEditableText.call()),
-            reviewersExpansionPanel(
-                reviewers, "Reviews", (reviewer) => reviewText.call(reviewer)),
-          ],
+  Widget skillCategorySection(WidgetRef ref, job, SkillCategory category) {
+    return section(
+      category.name,
+      () => SignedSpacingColumn(
+        spacing: 40,
+        children: category.skills
+            .map(
+              (skill) => skillReviewSection(
+                ref: ref,
+                job: job,
+                category: category,
+                skill: skill,
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  Widget skillReviewSection(
+      {required WidgetRef ref,
+      required CloudantDoc job,
+      required SkillCategory category,
+      required Skill skill}) {
+    return SignedSpacingColumn(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 5,
+      children: [
+        TextField(
+          style: Constants.skillNameEditStyle,
+          decoration: Constants.editInputDecoration,
+          controller: ref.read(TecProvider('${skill.id}.skill.name'))!
+            ..text = skill.name,
         ),
-      ),
+        TextField(
+          decoration: Constants.editInputDecoration,
+          maxLines: 10,
+          minLines: 1,
+          controller: ref.read(TecProvider('${skill.id}.skill.description'))!
+            ..text = skill.description,
+        ),
+        skillReviewsList(
+            reviews: job.collectSkillReviews(
+                skillCategoryId: category.id, skillId: skill.id)),
+      ],
     );
   }
 
-  Widget sectionEditWidget(
-      WidgetRef ref, TextFieldId field, String title, String textToEdit) {
-    final c = ref.read(tecProvider(TextFieldId.jobSummary));
-    c.text = textToEdit;
-
+  Widget skillReviewsList({required List<SkillReview> reviews}) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-      child: Column(
+      padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+      child: SignedSpacingColumn(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Text(
-          //   title,
-          //   style: Constants.sectionTitleStyle,
-          // ),
-          TextField(
-            decoration: Constants.editInputDecoration
-                .copyWith(labelText: 'Job Summary'),
-            controller: c,
-            maxLines: 100,
-            minLines: 5,
-          ),
+        spacing: 20,
+        children: reviews
+            .map((r) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      r.reviewer,
+                      style: Constants.reviewerStyle,
+                    ),
+                    Text(r.name),
+                    Text(r.description),
+                  ],
+                ))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget section(String sectionTitle, Widget Function() contents) {
+    return DecoratedBox(
+      decoration: BoxDecoration(border: Border.all()),
+      child: ExpansionTile(
+        title: Text(sectionTitle, style: Constants.sectionTitleStyle),
+        childrenPadding: const EdgeInsets.all(20),
+        children: <Widget>[
+          contents.call(),
         ],
       ),
     );
   }
 
-  Widget reviewersExpansionPanel(List<Reviewer> reviewers, String title,
-      String Function(Reviewer reviewer) reviewText) {
-    List<Widget> reviews = [];
-
-    reviews.add(const Divider());
-    for (var reviewer in reviewers) {
-      if (reviewText.call(reviewer).trim().isNotEmpty) {
-        reviews.add(Text(reviewer.reviewer));
-        reviews.add(reviewTextWidget(reviewText, reviewer));
-        reviews.add(const Divider());
-      }
-    }
-
-    return ExpansionTile(
-      expandedCrossAxisAlignment: CrossAxisAlignment.start,
-      title: Text(
-        title,
-        style: Constants.reviewExpansionTitleStyle,
-      ),
-      childrenPadding: const EdgeInsets.all(20),
-      children: reviews,
+  Widget simpleReviewSection({
+    required WidgetRef ref,
+    required String fieldId,
+    required String initialValue,
+    List<FieldReview> reviews = const [],
+  }) {
+    return SignedSpacingColumn(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 10,
+      children: [
+        TextField(
+          decoration: Constants.editInputDecoration,
+          maxLines: 100,
+          minLines: 3,
+          controller: ref.read(tecProvider(fieldId))!..text = initialValue,
+        ),
+        simpleReviewsList(reviews: reviews),
+      ],
     );
   }
 
-  Widget reviewTextWidget(
-          String Function(Reviewer reviewer) reviewText, Reviewer reviewer) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ListTile(title: Text(reviewText.call(reviewer))),
-          ),
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.copy_all),
-            onPressed: () {},
-          ),
-        ],
-      );
+  Widget simpleReviewsList({List<FieldReview> reviews = const []}) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+      child: SignedSpacingColumn(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 15,
+        children: reviews
+            .map(
+              (r) => SignedSpacingColumn(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 5,
+                children: [
+                  Text(
+                    r.reviewer,
+                    style: Constants.reviewerStyle,
+                  ),
+                  Text(r.review),
+                ],
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
 }

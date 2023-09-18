@@ -14,339 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Job _$JobFromJson(Map<String, dynamic> json) {
-  return _Job.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Job {
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: '_rev')
-  String get rev =>
-      throw _privateConstructorUsedError; // required DateTime timeStamp,
-  int get jobId => throw _privateConstructorUsedError;
-  String get jobTitle => throw _privateConstructorUsedError;
-  String get jobDescription => throw _privateConstructorUsedError;
-  String get jobSummary => throw _privateConstructorUsedError;
-  String get skillCategory => throw _privateConstructorUsedError;
-  List<Skill> get skills => throw _privateConstructorUsedError;
-  List<Reviewer> get reviewers => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $JobCopyWith<Job> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $JobCopyWith<$Res> {
-  factory $JobCopyWith(Job value, $Res Function(Job) then) =
-      _$JobCopyWithImpl<$Res, Job>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: '_rev') String rev,
-      int jobId,
-      String jobTitle,
-      String jobDescription,
-      String jobSummary,
-      String skillCategory,
-      List<Skill> skills,
-      List<Reviewer> reviewers});
-}
-
-/// @nodoc
-class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
-  _$JobCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? rev = null,
-    Object? jobId = null,
-    Object? jobTitle = null,
-    Object? jobDescription = null,
-    Object? jobSummary = null,
-    Object? skillCategory = null,
-    Object? skills = null,
-    Object? reviewers = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      rev: null == rev
-          ? _value.rev
-          : rev // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobId: null == jobId
-          ? _value.jobId
-          : jobId // ignore: cast_nullable_to_non_nullable
-              as int,
-      jobTitle: null == jobTitle
-          ? _value.jobTitle
-          : jobTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobDescription: null == jobDescription
-          ? _value.jobDescription
-          : jobDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobSummary: null == jobSummary
-          ? _value.jobSummary
-          : jobSummary // ignore: cast_nullable_to_non_nullable
-              as String,
-      skillCategory: null == skillCategory
-          ? _value.skillCategory
-          : skillCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      skills: null == skills
-          ? _value.skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<Skill>,
-      reviewers: null == reviewers
-          ? _value.reviewers
-          : reviewers // ignore: cast_nullable_to_non_nullable
-              as List<Reviewer>,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
-  factory _$$_JobCopyWith(_$_Job value, $Res Function(_$_Job) then) =
-      __$$_JobCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: '_rev') String rev,
-      int jobId,
-      String jobTitle,
-      String jobDescription,
-      String jobSummary,
-      String skillCategory,
-      List<Skill> skills,
-      List<Reviewer> reviewers});
-}
-
-/// @nodoc
-class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
-    implements _$$_JobCopyWith<$Res> {
-  __$$_JobCopyWithImpl(_$_Job _value, $Res Function(_$_Job) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? rev = null,
-    Object? jobId = null,
-    Object? jobTitle = null,
-    Object? jobDescription = null,
-    Object? jobSummary = null,
-    Object? skillCategory = null,
-    Object? skills = null,
-    Object? reviewers = null,
-  }) {
-    return _then(_$_Job(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      rev: null == rev
-          ? _value.rev
-          : rev // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobId: null == jobId
-          ? _value.jobId
-          : jobId // ignore: cast_nullable_to_non_nullable
-              as int,
-      jobTitle: null == jobTitle
-          ? _value.jobTitle
-          : jobTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobDescription: null == jobDescription
-          ? _value.jobDescription
-          : jobDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobSummary: null == jobSummary
-          ? _value.jobSummary
-          : jobSummary // ignore: cast_nullable_to_non_nullable
-              as String,
-      skillCategory: null == skillCategory
-          ? _value.skillCategory
-          : skillCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      skills: null == skills
-          ? _value._skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<Skill>,
-      reviewers: null == reviewers
-          ? _value._reviewers
-          : reviewers // ignore: cast_nullable_to_non_nullable
-              as List<Reviewer>,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Job implements _Job {
-  _$_Job(
-      {@JsonKey(name: '_id') required this.id,
-      @JsonKey(name: '_rev') required this.rev,
-      required this.jobId,
-      required this.jobTitle,
-      required this.jobDescription,
-      required this.jobSummary,
-      required this.skillCategory,
-      required final List<Skill> skills,
-      final List<Reviewer> reviewers = const []})
-      : _skills = skills,
-        _reviewers = reviewers;
-
-  factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
-
-  @override
-  @JsonKey(name: '_id')
-  final String id;
-  @override
-  @JsonKey(name: '_rev')
-  final String rev;
-// required DateTime timeStamp,
-  @override
-  final int jobId;
-  @override
-  final String jobTitle;
-  @override
-  final String jobDescription;
-  @override
-  final String jobSummary;
-  @override
-  final String skillCategory;
-  final List<Skill> _skills;
-  @override
-  List<Skill> get skills {
-    if (_skills is EqualUnmodifiableListView) return _skills;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_skills);
-  }
-
-  final List<Reviewer> _reviewers;
-  @override
-  @JsonKey()
-  List<Reviewer> get reviewers {
-    if (_reviewers is EqualUnmodifiableListView) return _reviewers;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviewers);
-  }
-
-  @override
-  String toString() {
-    return 'Job(id: $id, rev: $rev, jobId: $jobId, jobTitle: $jobTitle, jobDescription: $jobDescription, jobSummary: $jobSummary, skillCategory: $skillCategory, skills: $skills, reviewers: $reviewers)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Job &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.rev, rev) || other.rev == rev) &&
-            (identical(other.jobId, jobId) || other.jobId == jobId) &&
-            (identical(other.jobTitle, jobTitle) ||
-                other.jobTitle == jobTitle) &&
-            (identical(other.jobDescription, jobDescription) ||
-                other.jobDescription == jobDescription) &&
-            (identical(other.jobSummary, jobSummary) ||
-                other.jobSummary == jobSummary) &&
-            (identical(other.skillCategory, skillCategory) ||
-                other.skillCategory == skillCategory) &&
-            const DeepCollectionEquality().equals(other._skills, _skills) &&
-            const DeepCollectionEquality()
-                .equals(other._reviewers, _reviewers));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      rev,
-      jobId,
-      jobTitle,
-      jobDescription,
-      jobSummary,
-      skillCategory,
-      const DeepCollectionEquality().hash(_skills),
-      const DeepCollectionEquality().hash(_reviewers));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_JobCopyWith<_$_Job> get copyWith =>
-      __$$_JobCopyWithImpl<_$_Job>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_JobToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Job implements Job {
-  factory _Job(
-      {@JsonKey(name: '_id') required final String id,
-      @JsonKey(name: '_rev') required final String rev,
-      required final int jobId,
-      required final String jobTitle,
-      required final String jobDescription,
-      required final String jobSummary,
-      required final String skillCategory,
-      required final List<Skill> skills,
-      final List<Reviewer> reviewers}) = _$_Job;
-
-  factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
-
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(name: '_rev')
-  String get rev;
-  @override // required DateTime timeStamp,
-  int get jobId;
-  @override
-  String get jobTitle;
-  @override
-  String get jobDescription;
-  @override
-  String get jobSummary;
-  @override
-  String get skillCategory;
-  @override
-  List<Skill> get skills;
-  @override
-  List<Reviewer> get reviewers;
-  @override
-  @JsonKey(ignore: true)
-  _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;
-}
-
 Skill _$SkillFromJson(Map<String, dynamic> json) {
   return _Skill.fromJson(json);
 }
 
 /// @nodoc
 mixin _$Skill {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
@@ -360,7 +34,7 @@ abstract class $SkillCopyWith<$Res> {
   factory $SkillCopyWith(Skill value, $Res Function(Skill) then) =
       _$SkillCopyWithImpl<$Res, Skill>;
   @useResult
-  $Res call({String name, String description});
+  $Res call({String id, String name, String description});
 }
 
 /// @nodoc
@@ -376,10 +50,15 @@ class _$SkillCopyWithImpl<$Res, $Val extends Skill>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? description = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -398,7 +77,7 @@ abstract class _$$_SkillCopyWith<$Res> implements $SkillCopyWith<$Res> {
       __$$_SkillCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String description});
+  $Res call({String id, String name, String description});
 }
 
 /// @nodoc
@@ -410,10 +89,15 @@ class __$$_SkillCopyWithImpl<$Res> extends _$SkillCopyWithImpl<$Res, _$_Skill>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? description = null,
   }) {
     return _then(_$_Skill(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -429,11 +113,13 @@ class __$$_SkillCopyWithImpl<$Res> extends _$SkillCopyWithImpl<$Res, _$_Skill>
 /// @nodoc
 @JsonSerializable()
 class _$_Skill implements _Skill {
-  _$_Skill({required this.name, required this.description});
+  _$_Skill({required this.id, required this.name, required this.description});
 
   factory _$_Skill.fromJson(Map<String, dynamic> json) =>
       _$$_SkillFromJson(json);
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -441,7 +127,7 @@ class _$_Skill implements _Skill {
 
   @override
   String toString() {
-    return 'Skill(name: $name, description: $description)';
+    return 'Skill(id: $id, name: $name, description: $description)';
   }
 
   @override
@@ -449,6 +135,7 @@ class _$_Skill implements _Skill {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Skill &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -456,7 +143,7 @@ class _$_Skill implements _Skill {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description);
+  int get hashCode => Object.hash(runtimeType, id, name, description);
 
   @JsonKey(ignore: true)
   @override
@@ -474,11 +161,14 @@ class _$_Skill implements _Skill {
 
 abstract class _Skill implements Skill {
   factory _Skill(
-      {required final String name,
+      {required final String id,
+      required final String name,
       required final String description}) = _$_Skill;
 
   factory _Skill.fromJson(Map<String, dynamic> json) = _$_Skill.fromJson;
 
+  @override
+  String get id;
   @override
   String get name;
   @override
@@ -489,43 +179,35 @@ abstract class _Skill implements Skill {
       throw _privateConstructorUsedError;
 }
 
-Reviewer _$ReviewerFromJson(Map<String, dynamic> json) {
-  return _Reviewer.fromJson(json);
+SkillCategory _$SkillCategoryFromJson(Map<String, dynamic> json) {
+  return _SkillCategory.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Reviewer {
-  String get reviewer => throw _privateConstructorUsedError;
-  bool get status => throw _privateConstructorUsedError;
-  int get rating => throw _privateConstructorUsedError;
-  String get jobSummary => throw _privateConstructorUsedError;
-  String get skillCategory => throw _privateConstructorUsedError;
+mixin _$SkillCategory {
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   List<Skill> get skills => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ReviewerCopyWith<Reviewer> get copyWith =>
+  $SkillCategoryCopyWith<SkillCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReviewerCopyWith<$Res> {
-  factory $ReviewerCopyWith(Reviewer value, $Res Function(Reviewer) then) =
-      _$ReviewerCopyWithImpl<$Res, Reviewer>;
+abstract class $SkillCategoryCopyWith<$Res> {
+  factory $SkillCategoryCopyWith(
+          SkillCategory value, $Res Function(SkillCategory) then) =
+      _$SkillCategoryCopyWithImpl<$Res, SkillCategory>;
   @useResult
-  $Res call(
-      {String reviewer,
-      bool status,
-      int rating,
-      String jobSummary,
-      String skillCategory,
-      List<Skill> skills});
+  $Res call({String id, String name, List<Skill> skills});
 }
 
 /// @nodoc
-class _$ReviewerCopyWithImpl<$Res, $Val extends Reviewer>
-    implements $ReviewerCopyWith<$Res> {
-  _$ReviewerCopyWithImpl(this._value, this._then);
+class _$SkillCategoryCopyWithImpl<$Res, $Val extends SkillCategory>
+    implements $SkillCategoryCopyWith<$Res> {
+  _$SkillCategoryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -535,33 +217,18 @@ class _$ReviewerCopyWithImpl<$Res, $Val extends Reviewer>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewer = null,
-    Object? status = null,
-    Object? rating = null,
-    Object? jobSummary = null,
-    Object? skillCategory = null,
+    Object? id = null,
+    Object? name = null,
     Object? skills = null,
   }) {
     return _then(_value.copyWith(
-      reviewer: null == reviewer
-          ? _value.reviewer
-          : reviewer // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as bool,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as int,
-      jobSummary: null == jobSummary
-          ? _value.jobSummary
-          : jobSummary // ignore: cast_nullable_to_non_nullable
-              as String,
-      skillCategory: null == skillCategory
-          ? _value.skillCategory
-          : skillCategory // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       skills: null == skills
           ? _value.skills
@@ -572,59 +239,39 @@ class _$ReviewerCopyWithImpl<$Res, $Val extends Reviewer>
 }
 
 /// @nodoc
-abstract class _$$_ReviewerCopyWith<$Res> implements $ReviewerCopyWith<$Res> {
-  factory _$$_ReviewerCopyWith(
-          _$_Reviewer value, $Res Function(_$_Reviewer) then) =
-      __$$_ReviewerCopyWithImpl<$Res>;
+abstract class _$$_SkillCategoryCopyWith<$Res>
+    implements $SkillCategoryCopyWith<$Res> {
+  factory _$$_SkillCategoryCopyWith(
+          _$_SkillCategory value, $Res Function(_$_SkillCategory) then) =
+      __$$_SkillCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String reviewer,
-      bool status,
-      int rating,
-      String jobSummary,
-      String skillCategory,
-      List<Skill> skills});
+  $Res call({String id, String name, List<Skill> skills});
 }
 
 /// @nodoc
-class __$$_ReviewerCopyWithImpl<$Res>
-    extends _$ReviewerCopyWithImpl<$Res, _$_Reviewer>
-    implements _$$_ReviewerCopyWith<$Res> {
-  __$$_ReviewerCopyWithImpl(
-      _$_Reviewer _value, $Res Function(_$_Reviewer) _then)
+class __$$_SkillCategoryCopyWithImpl<$Res>
+    extends _$SkillCategoryCopyWithImpl<$Res, _$_SkillCategory>
+    implements _$$_SkillCategoryCopyWith<$Res> {
+  __$$_SkillCategoryCopyWithImpl(
+      _$_SkillCategory _value, $Res Function(_$_SkillCategory) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewer = null,
-    Object? status = null,
-    Object? rating = null,
-    Object? jobSummary = null,
-    Object? skillCategory = null,
+    Object? id = null,
+    Object? name = null,
     Object? skills = null,
   }) {
-    return _then(_$_Reviewer(
-      reviewer: null == reviewer
-          ? _value.reviewer
-          : reviewer // ignore: cast_nullable_to_non_nullable
+    return _then(_$_SkillCategory(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as bool,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as int,
-      jobSummary: null == jobSummary
-          ? _value.jobSummary
-          : jobSummary // ignore: cast_nullable_to_non_nullable
-              as String,
-      skillCategory: null == skillCategory
-          ? _value.skillCategory
-          : skillCategory // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       skills: null == skills
           ? _value._skills
@@ -636,29 +283,18 @@ class __$$_ReviewerCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Reviewer implements _Reviewer {
-  _$_Reviewer(
-      {required this.reviewer,
-      required this.status,
-      required this.rating,
-      required this.jobSummary,
-      required this.skillCategory,
-      required final List<Skill> skills})
+class _$_SkillCategory implements _SkillCategory {
+  _$_SkillCategory(
+      {required this.id, required this.name, required final List<Skill> skills})
       : _skills = skills;
 
-  factory _$_Reviewer.fromJson(Map<String, dynamic> json) =>
-      _$$_ReviewerFromJson(json);
+  factory _$_SkillCategory.fromJson(Map<String, dynamic> json) =>
+      _$$_SkillCategoryFromJson(json);
 
   @override
-  final String reviewer;
+  final String id;
   @override
-  final bool status;
-  @override
-  final int rating;
-  @override
-  final String jobSummary;
-  @override
-  final String skillCategory;
+  final String name;
   final List<Skill> _skills;
   @override
   List<Skill> get skills {
@@ -669,69 +305,1314 @@ class _$_Reviewer implements _Reviewer {
 
   @override
   String toString() {
-    return 'Reviewer(reviewer: $reviewer, status: $status, rating: $rating, jobSummary: $jobSummary, skillCategory: $skillCategory, skills: $skills)';
+    return 'SkillCategory(id: $id, name: $name, skills: $skills)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Reviewer &&
-            (identical(other.reviewer, reviewer) ||
-                other.reviewer == reviewer) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.jobSummary, jobSummary) ||
-                other.jobSummary == jobSummary) &&
-            (identical(other.skillCategory, skillCategory) ||
-                other.skillCategory == skillCategory) &&
+            other is _$_SkillCategory &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._skills, _skills));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, reviewer, status, rating,
-      jobSummary, skillCategory, const DeepCollectionEquality().hash(_skills));
+  int get hashCode => Object.hash(
+      runtimeType, id, name, const DeepCollectionEquality().hash(_skills));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewerCopyWith<_$_Reviewer> get copyWith =>
-      __$$_ReviewerCopyWithImpl<_$_Reviewer>(this, _$identity);
+  _$$_SkillCategoryCopyWith<_$_SkillCategory> get copyWith =>
+      __$$_SkillCategoryCopyWithImpl<_$_SkillCategory>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReviewerToJson(
+    return _$$_SkillCategoryToJson(
       this,
     );
   }
 }
 
-abstract class _Reviewer implements Reviewer {
-  factory _Reviewer(
-      {required final String reviewer,
-      required final bool status,
-      required final int rating,
-      required final String jobSummary,
-      required final String skillCategory,
-      required final List<Skill> skills}) = _$_Reviewer;
+abstract class _SkillCategory implements SkillCategory {
+  factory _SkillCategory(
+      {required final String id,
+      required final String name,
+      required final List<Skill> skills}) = _$_SkillCategory;
 
-  factory _Reviewer.fromJson(Map<String, dynamic> json) = _$_Reviewer.fromJson;
+  factory _SkillCategory.fromJson(Map<String, dynamic> json) =
+      _$_SkillCategory.fromJson;
 
   @override
-  String get reviewer;
+  String get id;
   @override
-  bool get status;
-  @override
-  int get rating;
-  @override
-  String get jobSummary;
-  @override
-  String get skillCategory;
+  String get name;
   @override
   List<Skill> get skills;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewerCopyWith<_$_Reviewer> get copyWith =>
+  _$$_SkillCategoryCopyWith<_$_SkillCategory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+DocumentVersion _$DocumentVersionFromJson(Map<String, dynamic> json) {
+  return _DocumentVersion.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DocumentVersion {
+  String get id => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
+  bool get submitted => throw _privateConstructorUsedError;
+  int get creationTime => throw _privateConstructorUsedError;
+  int get modificationTime => throw _privateConstructorUsedError;
+  String get jobSummary => throw _privateConstructorUsedError;
+  List<SkillCategory> get skillCategories => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DocumentVersionCopyWith<DocumentVersion> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DocumentVersionCopyWith<$Res> {
+  factory $DocumentVersionCopyWith(
+          DocumentVersion value, $Res Function(DocumentVersion) then) =
+      _$DocumentVersionCopyWithImpl<$Res, DocumentVersion>;
+  @useResult
+  $Res call(
+      {String id,
+      String author,
+      bool submitted,
+      int creationTime,
+      int modificationTime,
+      String jobSummary,
+      List<SkillCategory> skillCategories});
+}
+
+/// @nodoc
+class _$DocumentVersionCopyWithImpl<$Res, $Val extends DocumentVersion>
+    implements $DocumentVersionCopyWith<$Res> {
+  _$DocumentVersionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? author = null,
+    Object? submitted = null,
+    Object? creationTime = null,
+    Object? modificationTime = null,
+    Object? jobSummary = null,
+    Object? skillCategories = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitted: null == submitted
+          ? _value.submitted
+          : submitted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      creationTime: null == creationTime
+          ? _value.creationTime
+          : creationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      modificationTime: null == modificationTime
+          ? _value.modificationTime
+          : modificationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      jobSummary: null == jobSummary
+          ? _value.jobSummary
+          : jobSummary // ignore: cast_nullable_to_non_nullable
+              as String,
+      skillCategories: null == skillCategories
+          ? _value.skillCategories
+          : skillCategories // ignore: cast_nullable_to_non_nullable
+              as List<SkillCategory>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DocumentVersionCopyWith<$Res>
+    implements $DocumentVersionCopyWith<$Res> {
+  factory _$$_DocumentVersionCopyWith(
+          _$_DocumentVersion value, $Res Function(_$_DocumentVersion) then) =
+      __$$_DocumentVersionCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String author,
+      bool submitted,
+      int creationTime,
+      int modificationTime,
+      String jobSummary,
+      List<SkillCategory> skillCategories});
+}
+
+/// @nodoc
+class __$$_DocumentVersionCopyWithImpl<$Res>
+    extends _$DocumentVersionCopyWithImpl<$Res, _$_DocumentVersion>
+    implements _$$_DocumentVersionCopyWith<$Res> {
+  __$$_DocumentVersionCopyWithImpl(
+      _$_DocumentVersion _value, $Res Function(_$_DocumentVersion) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? author = null,
+    Object? submitted = null,
+    Object? creationTime = null,
+    Object? modificationTime = null,
+    Object? jobSummary = null,
+    Object? skillCategories = null,
+  }) {
+    return _then(_$_DocumentVersion(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitted: null == submitted
+          ? _value.submitted
+          : submitted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      creationTime: null == creationTime
+          ? _value.creationTime
+          : creationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      modificationTime: null == modificationTime
+          ? _value.modificationTime
+          : modificationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      jobSummary: null == jobSummary
+          ? _value.jobSummary
+          : jobSummary // ignore: cast_nullable_to_non_nullable
+              as String,
+      skillCategories: null == skillCategories
+          ? _value._skillCategories
+          : skillCategories // ignore: cast_nullable_to_non_nullable
+              as List<SkillCategory>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_DocumentVersion implements _DocumentVersion {
+  _$_DocumentVersion(
+      {required this.id,
+      this.author = "",
+      required this.submitted,
+      required this.creationTime,
+      required this.modificationTime,
+      required this.jobSummary,
+      required final List<SkillCategory> skillCategories})
+      : _skillCategories = skillCategories;
+
+  factory _$_DocumentVersion.fromJson(Map<String, dynamic> json) =>
+      _$$_DocumentVersionFromJson(json);
+
+  @override
+  final String id;
+  @override
+  @JsonKey()
+  final String author;
+  @override
+  final bool submitted;
+  @override
+  final int creationTime;
+  @override
+  final int modificationTime;
+  @override
+  final String jobSummary;
+  final List<SkillCategory> _skillCategories;
+  @override
+  List<SkillCategory> get skillCategories {
+    if (_skillCategories is EqualUnmodifiableListView) return _skillCategories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_skillCategories);
+  }
+
+  @override
+  String toString() {
+    return 'DocumentVersion(id: $id, author: $author, submitted: $submitted, creationTime: $creationTime, modificationTime: $modificationTime, jobSummary: $jobSummary, skillCategories: $skillCategories)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DocumentVersion &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.submitted, submitted) ||
+                other.submitted == submitted) &&
+            (identical(other.creationTime, creationTime) ||
+                other.creationTime == creationTime) &&
+            (identical(other.modificationTime, modificationTime) ||
+                other.modificationTime == modificationTime) &&
+            (identical(other.jobSummary, jobSummary) ||
+                other.jobSummary == jobSummary) &&
+            const DeepCollectionEquality()
+                .equals(other._skillCategories, _skillCategories));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      author,
+      submitted,
+      creationTime,
+      modificationTime,
+      jobSummary,
+      const DeepCollectionEquality().hash(_skillCategories));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DocumentVersionCopyWith<_$_DocumentVersion> get copyWith =>
+      __$$_DocumentVersionCopyWithImpl<_$_DocumentVersion>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DocumentVersionToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DocumentVersion implements DocumentVersion {
+  factory _DocumentVersion(
+      {required final String id,
+      final String author,
+      required final bool submitted,
+      required final int creationTime,
+      required final int modificationTime,
+      required final String jobSummary,
+      required final List<SkillCategory> skillCategories}) = _$_DocumentVersion;
+
+  factory _DocumentVersion.fromJson(Map<String, dynamic> json) =
+      _$_DocumentVersion.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get author;
+  @override
+  bool get submitted;
+  @override
+  int get creationTime;
+  @override
+  int get modificationTime;
+  @override
+  String get jobSummary;
+  @override
+  List<SkillCategory> get skillCategories;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DocumentVersionCopyWith<_$_DocumentVersion> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Versions _$VersionsFromJson(Map<String, dynamic> json) {
+  return _Versions.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Versions {
+  DocumentVersion get generation => throw _privateConstructorUsedError;
+  DocumentVersion get initialEdit => throw _privateConstructorUsedError;
+  DocumentVersion get finalEdit => throw _privateConstructorUsedError;
+  List<DocumentVersion> get reviews => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VersionsCopyWith<Versions> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VersionsCopyWith<$Res> {
+  factory $VersionsCopyWith(Versions value, $Res Function(Versions) then) =
+      _$VersionsCopyWithImpl<$Res, Versions>;
+  @useResult
+  $Res call(
+      {DocumentVersion generation,
+      DocumentVersion initialEdit,
+      DocumentVersion finalEdit,
+      List<DocumentVersion> reviews});
+
+  $DocumentVersionCopyWith<$Res> get generation;
+  $DocumentVersionCopyWith<$Res> get initialEdit;
+  $DocumentVersionCopyWith<$Res> get finalEdit;
+}
+
+/// @nodoc
+class _$VersionsCopyWithImpl<$Res, $Val extends Versions>
+    implements $VersionsCopyWith<$Res> {
+  _$VersionsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? generation = null,
+    Object? initialEdit = null,
+    Object? finalEdit = null,
+    Object? reviews = null,
+  }) {
+    return _then(_value.copyWith(
+      generation: null == generation
+          ? _value.generation
+          : generation // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      initialEdit: null == initialEdit
+          ? _value.initialEdit
+          : initialEdit // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      finalEdit: null == finalEdit
+          ? _value.finalEdit
+          : finalEdit // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<DocumentVersion>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentVersionCopyWith<$Res> get generation {
+    return $DocumentVersionCopyWith<$Res>(_value.generation, (value) {
+      return _then(_value.copyWith(generation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentVersionCopyWith<$Res> get initialEdit {
+    return $DocumentVersionCopyWith<$Res>(_value.initialEdit, (value) {
+      return _then(_value.copyWith(initialEdit: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentVersionCopyWith<$Res> get finalEdit {
+    return $DocumentVersionCopyWith<$Res>(_value.finalEdit, (value) {
+      return _then(_value.copyWith(finalEdit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_VersionsCopyWith<$Res> implements $VersionsCopyWith<$Res> {
+  factory _$$_VersionsCopyWith(
+          _$_Versions value, $Res Function(_$_Versions) then) =
+      __$$_VersionsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {DocumentVersion generation,
+      DocumentVersion initialEdit,
+      DocumentVersion finalEdit,
+      List<DocumentVersion> reviews});
+
+  @override
+  $DocumentVersionCopyWith<$Res> get generation;
+  @override
+  $DocumentVersionCopyWith<$Res> get initialEdit;
+  @override
+  $DocumentVersionCopyWith<$Res> get finalEdit;
+}
+
+/// @nodoc
+class __$$_VersionsCopyWithImpl<$Res>
+    extends _$VersionsCopyWithImpl<$Res, _$_Versions>
+    implements _$$_VersionsCopyWith<$Res> {
+  __$$_VersionsCopyWithImpl(
+      _$_Versions _value, $Res Function(_$_Versions) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? generation = null,
+    Object? initialEdit = null,
+    Object? finalEdit = null,
+    Object? reviews = null,
+  }) {
+    return _then(_$_Versions(
+      generation: null == generation
+          ? _value.generation
+          : generation // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      initialEdit: null == initialEdit
+          ? _value.initialEdit
+          : initialEdit // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      finalEdit: null == finalEdit
+          ? _value.finalEdit
+          : finalEdit // ignore: cast_nullable_to_non_nullable
+              as DocumentVersion,
+      reviews: null == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<DocumentVersion>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Versions implements _Versions {
+  _$_Versions(
+      {required this.generation,
+      required this.initialEdit,
+      required this.finalEdit,
+      required final List<DocumentVersion> reviews})
+      : _reviews = reviews;
+
+  factory _$_Versions.fromJson(Map<String, dynamic> json) =>
+      _$$_VersionsFromJson(json);
+
+  @override
+  final DocumentVersion generation;
+  @override
+  final DocumentVersion initialEdit;
+  @override
+  final DocumentVersion finalEdit;
+  final List<DocumentVersion> _reviews;
+  @override
+  List<DocumentVersion> get reviews {
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviews);
+  }
+
+  @override
+  String toString() {
+    return 'Versions(generation: $generation, initialEdit: $initialEdit, finalEdit: $finalEdit, reviews: $reviews)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Versions &&
+            (identical(other.generation, generation) ||
+                other.generation == generation) &&
+            (identical(other.initialEdit, initialEdit) ||
+                other.initialEdit == initialEdit) &&
+            (identical(other.finalEdit, finalEdit) ||
+                other.finalEdit == finalEdit) &&
+            const DeepCollectionEquality().equals(other._reviews, _reviews));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, generation, initialEdit,
+      finalEdit, const DeepCollectionEquality().hash(_reviews));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_VersionsCopyWith<_$_Versions> get copyWith =>
+      __$$_VersionsCopyWithImpl<_$_Versions>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_VersionsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Versions implements Versions {
+  factory _Versions(
+      {required final DocumentVersion generation,
+      required final DocumentVersion initialEdit,
+      required final DocumentVersion finalEdit,
+      required final List<DocumentVersion> reviews}) = _$_Versions;
+
+  factory _Versions.fromJson(Map<String, dynamic> json) = _$_Versions.fromJson;
+
+  @override
+  DocumentVersion get generation;
+  @override
+  DocumentVersion get initialEdit;
+  @override
+  DocumentVersion get finalEdit;
+  @override
+  List<DocumentVersion> get reviews;
+  @override
+  @JsonKey(ignore: true)
+  _$$_VersionsCopyWith<_$_Versions> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Input _$InputFromJson(Map<String, dynamic> json) {
+  return _Input.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Input {
+  String get submitter => throw _privateConstructorUsedError;
+  String get jobId => throw _privateConstructorUsedError;
+  String get jobTitle => throw _privateConstructorUsedError;
+  String get jobDescription => throw _privateConstructorUsedError;
+  List<String> get requestedSkillCategories =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InputCopyWith<Input> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InputCopyWith<$Res> {
+  factory $InputCopyWith(Input value, $Res Function(Input) then) =
+      _$InputCopyWithImpl<$Res, Input>;
+  @useResult
+  $Res call(
+      {String submitter,
+      String jobId,
+      String jobTitle,
+      String jobDescription,
+      List<String> requestedSkillCategories});
+}
+
+/// @nodoc
+class _$InputCopyWithImpl<$Res, $Val extends Input>
+    implements $InputCopyWith<$Res> {
+  _$InputCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? submitter = null,
+    Object? jobId = null,
+    Object? jobTitle = null,
+    Object? jobDescription = null,
+    Object? requestedSkillCategories = null,
+  }) {
+    return _then(_value.copyWith(
+      submitter: null == submitter
+          ? _value.submitter
+          : submitter // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobId: null == jobId
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobTitle: null == jobTitle
+          ? _value.jobTitle
+          : jobTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobDescription: null == jobDescription
+          ? _value.jobDescription
+          : jobDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      requestedSkillCategories: null == requestedSkillCategories
+          ? _value.requestedSkillCategories
+          : requestedSkillCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_InputCopyWith<$Res> implements $InputCopyWith<$Res> {
+  factory _$$_InputCopyWith(_$_Input value, $Res Function(_$_Input) then) =
+      __$$_InputCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String submitter,
+      String jobId,
+      String jobTitle,
+      String jobDescription,
+      List<String> requestedSkillCategories});
+}
+
+/// @nodoc
+class __$$_InputCopyWithImpl<$Res> extends _$InputCopyWithImpl<$Res, _$_Input>
+    implements _$$_InputCopyWith<$Res> {
+  __$$_InputCopyWithImpl(_$_Input _value, $Res Function(_$_Input) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? submitter = null,
+    Object? jobId = null,
+    Object? jobTitle = null,
+    Object? jobDescription = null,
+    Object? requestedSkillCategories = null,
+  }) {
+    return _then(_$_Input(
+      submitter: null == submitter
+          ? _value.submitter
+          : submitter // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobId: null == jobId
+          ? _value.jobId
+          : jobId // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobTitle: null == jobTitle
+          ? _value.jobTitle
+          : jobTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobDescription: null == jobDescription
+          ? _value.jobDescription
+          : jobDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      requestedSkillCategories: null == requestedSkillCategories
+          ? _value._requestedSkillCategories
+          : requestedSkillCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Input implements _Input {
+  _$_Input(
+      {this.submitter = "",
+      required this.jobId,
+      required this.jobTitle,
+      required this.jobDescription,
+      required final List<String> requestedSkillCategories})
+      : _requestedSkillCategories = requestedSkillCategories;
+
+  factory _$_Input.fromJson(Map<String, dynamic> json) =>
+      _$$_InputFromJson(json);
+
+  @override
+  @JsonKey()
+  final String submitter;
+  @override
+  final String jobId;
+  @override
+  final String jobTitle;
+  @override
+  final String jobDescription;
+  final List<String> _requestedSkillCategories;
+  @override
+  List<String> get requestedSkillCategories {
+    if (_requestedSkillCategories is EqualUnmodifiableListView)
+      return _requestedSkillCategories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_requestedSkillCategories);
+  }
+
+  @override
+  String toString() {
+    return 'Input(submitter: $submitter, jobId: $jobId, jobTitle: $jobTitle, jobDescription: $jobDescription, requestedSkillCategories: $requestedSkillCategories)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Input &&
+            (identical(other.submitter, submitter) ||
+                other.submitter == submitter) &&
+            (identical(other.jobId, jobId) || other.jobId == jobId) &&
+            (identical(other.jobTitle, jobTitle) ||
+                other.jobTitle == jobTitle) &&
+            (identical(other.jobDescription, jobDescription) ||
+                other.jobDescription == jobDescription) &&
+            const DeepCollectionEquality().equals(
+                other._requestedSkillCategories, _requestedSkillCategories));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      submitter,
+      jobId,
+      jobTitle,
+      jobDescription,
+      const DeepCollectionEquality().hash(_requestedSkillCategories));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InputCopyWith<_$_Input> get copyWith =>
+      __$$_InputCopyWithImpl<_$_Input>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_InputToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Input implements Input {
+  factory _Input(
+      {final String submitter,
+      required final String jobId,
+      required final String jobTitle,
+      required final String jobDescription,
+      required final List<String> requestedSkillCategories}) = _$_Input;
+
+  factory _Input.fromJson(Map<String, dynamic> json) = _$_Input.fromJson;
+
+  @override
+  String get submitter;
+  @override
+  String get jobId;
+  @override
+  String get jobTitle;
+  @override
+  String get jobDescription;
+  @override
+  List<String> get requestedSkillCategories;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InputCopyWith<_$_Input> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CloudantDoc _$CloudantDocFromJson(Map<String, dynamic> json) {
+  return _CloudantDoc.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CloudantDoc {
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
+  int get creationTime => throw _privateConstructorUsedError;
+  int get modificationTime => throw _privateConstructorUsedError;
+  Input get input => throw _privateConstructorUsedError;
+  Versions get versions => throw _privateConstructorUsedError;
+  int get generationRating => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CloudantDocCopyWith<CloudantDoc> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CloudantDocCopyWith<$Res> {
+  factory $CloudantDocCopyWith(
+          CloudantDoc value, $Res Function(CloudantDoc) then) =
+      _$CloudantDocCopyWithImpl<$Res, CloudantDoc>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      int creationTime,
+      int modificationTime,
+      Input input,
+      Versions versions,
+      int generationRating});
+
+  $InputCopyWith<$Res> get input;
+  $VersionsCopyWith<$Res> get versions;
+}
+
+/// @nodoc
+class _$CloudantDocCopyWithImpl<$Res, $Val extends CloudantDoc>
+    implements $CloudantDocCopyWith<$Res> {
+  _$CloudantDocCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? creationTime = null,
+    Object? modificationTime = null,
+    Object? input = null,
+    Object? versions = null,
+    Object? generationRating = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      creationTime: null == creationTime
+          ? _value.creationTime
+          : creationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      modificationTime: null == modificationTime
+          ? _value.modificationTime
+          : modificationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as Input,
+      versions: null == versions
+          ? _value.versions
+          : versions // ignore: cast_nullable_to_non_nullable
+              as Versions,
+      generationRating: null == generationRating
+          ? _value.generationRating
+          : generationRating // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InputCopyWith<$Res> get input {
+    return $InputCopyWith<$Res>(_value.input, (value) {
+      return _then(_value.copyWith(input: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VersionsCopyWith<$Res> get versions {
+    return $VersionsCopyWith<$Res>(_value.versions, (value) {
+      return _then(_value.copyWith(versions: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_CloudantDocCopyWith<$Res>
+    implements $CloudantDocCopyWith<$Res> {
+  factory _$$_CloudantDocCopyWith(
+          _$_CloudantDoc value, $Res Function(_$_CloudantDoc) then) =
+      __$$_CloudantDocCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      int creationTime,
+      int modificationTime,
+      Input input,
+      Versions versions,
+      int generationRating});
+
+  @override
+  $InputCopyWith<$Res> get input;
+  @override
+  $VersionsCopyWith<$Res> get versions;
+}
+
+/// @nodoc
+class __$$_CloudantDocCopyWithImpl<$Res>
+    extends _$CloudantDocCopyWithImpl<$Res, _$_CloudantDoc>
+    implements _$$_CloudantDocCopyWith<$Res> {
+  __$$_CloudantDocCopyWithImpl(
+      _$_CloudantDoc _value, $Res Function(_$_CloudantDoc) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? creationTime = null,
+    Object? modificationTime = null,
+    Object? input = null,
+    Object? versions = null,
+    Object? generationRating = null,
+  }) {
+    return _then(_$_CloudantDoc(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      creationTime: null == creationTime
+          ? _value.creationTime
+          : creationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      modificationTime: null == modificationTime
+          ? _value.modificationTime
+          : modificationTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as Input,
+      versions: null == versions
+          ? _value.versions
+          : versions // ignore: cast_nullable_to_non_nullable
+              as Versions,
+      generationRating: null == generationRating
+          ? _value.generationRating
+          : generationRating // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CloudantDoc extends _CloudantDoc {
+  _$_CloudantDoc(
+      {@JsonKey(name: '_id') required this.id,
+      required this.creationTime,
+      required this.modificationTime,
+      required this.input,
+      required this.versions,
+      required this.generationRating})
+      : super._();
+
+  factory _$_CloudantDoc.fromJson(Map<String, dynamic> json) =>
+      _$$_CloudantDocFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String id;
+  @override
+  final int creationTime;
+  @override
+  final int modificationTime;
+  @override
+  final Input input;
+  @override
+  final Versions versions;
+  @override
+  final int generationRating;
+
+  @override
+  String toString() {
+    return 'CloudantDoc(id: $id, creationTime: $creationTime, modificationTime: $modificationTime, input: $input, versions: $versions, generationRating: $generationRating)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CloudantDoc &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.creationTime, creationTime) ||
+                other.creationTime == creationTime) &&
+            (identical(other.modificationTime, modificationTime) ||
+                other.modificationTime == modificationTime) &&
+            (identical(other.input, input) || other.input == input) &&
+            (identical(other.versions, versions) ||
+                other.versions == versions) &&
+            (identical(other.generationRating, generationRating) ||
+                other.generationRating == generationRating));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, creationTime,
+      modificationTime, input, versions, generationRating);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CloudantDocCopyWith<_$_CloudantDoc> get copyWith =>
+      __$$_CloudantDocCopyWithImpl<_$_CloudantDoc>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CloudantDocToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CloudantDoc extends CloudantDoc {
+  factory _CloudantDoc(
+      {@JsonKey(name: '_id') required final String id,
+      required final int creationTime,
+      required final int modificationTime,
+      required final Input input,
+      required final Versions versions,
+      required final int generationRating}) = _$_CloudantDoc;
+  _CloudantDoc._() : super._();
+
+  factory _CloudantDoc.fromJson(Map<String, dynamic> json) =
+      _$_CloudantDoc.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String get id;
+  @override
+  int get creationTime;
+  @override
+  int get modificationTime;
+  @override
+  Input get input;
+  @override
+  Versions get versions;
+  @override
+  int get generationRating;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CloudantDocCopyWith<_$_CloudantDoc> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CollectedVersions _$CollectedVersionsFromJson(Map<String, dynamic> json) {
+  return _CollectedVersions.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CollectedVersions {
+  String get id => throw _privateConstructorUsedError;
+  String get generation => throw _privateConstructorUsedError;
+  String get initialEdit => throw _privateConstructorUsedError;
+  String get finalEdit => throw _privateConstructorUsedError;
+  List<String> get reviews => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CollectedVersionsCopyWith<CollectedVersions> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CollectedVersionsCopyWith<$Res> {
+  factory $CollectedVersionsCopyWith(
+          CollectedVersions value, $Res Function(CollectedVersions) then) =
+      _$CollectedVersionsCopyWithImpl<$Res, CollectedVersions>;
+  @useResult
+  $Res call(
+      {String id,
+      String generation,
+      String initialEdit,
+      String finalEdit,
+      List<String> reviews});
+}
+
+/// @nodoc
+class _$CollectedVersionsCopyWithImpl<$Res, $Val extends CollectedVersions>
+    implements $CollectedVersionsCopyWith<$Res> {
+  _$CollectedVersionsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? generation = null,
+    Object? initialEdit = null,
+    Object? finalEdit = null,
+    Object? reviews = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      generation: null == generation
+          ? _value.generation
+          : generation // ignore: cast_nullable_to_non_nullable
+              as String,
+      initialEdit: null == initialEdit
+          ? _value.initialEdit
+          : initialEdit // ignore: cast_nullable_to_non_nullable
+              as String,
+      finalEdit: null == finalEdit
+          ? _value.finalEdit
+          : finalEdit // ignore: cast_nullable_to_non_nullable
+              as String,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CollectedVersionsCopyWith<$Res>
+    implements $CollectedVersionsCopyWith<$Res> {
+  factory _$$_CollectedVersionsCopyWith(_$_CollectedVersions value,
+          $Res Function(_$_CollectedVersions) then) =
+      __$$_CollectedVersionsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String generation,
+      String initialEdit,
+      String finalEdit,
+      List<String> reviews});
+}
+
+/// @nodoc
+class __$$_CollectedVersionsCopyWithImpl<$Res>
+    extends _$CollectedVersionsCopyWithImpl<$Res, _$_CollectedVersions>
+    implements _$$_CollectedVersionsCopyWith<$Res> {
+  __$$_CollectedVersionsCopyWithImpl(
+      _$_CollectedVersions _value, $Res Function(_$_CollectedVersions) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? generation = null,
+    Object? initialEdit = null,
+    Object? finalEdit = null,
+    Object? reviews = null,
+  }) {
+    return _then(_$_CollectedVersions(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      generation: null == generation
+          ? _value.generation
+          : generation // ignore: cast_nullable_to_non_nullable
+              as String,
+      initialEdit: null == initialEdit
+          ? _value.initialEdit
+          : initialEdit // ignore: cast_nullable_to_non_nullable
+              as String,
+      finalEdit: null == finalEdit
+          ? _value.finalEdit
+          : finalEdit // ignore: cast_nullable_to_non_nullable
+              as String,
+      reviews: null == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CollectedVersions implements _CollectedVersions {
+  _$_CollectedVersions(
+      {required this.id,
+      required this.generation,
+      required this.initialEdit,
+      required this.finalEdit,
+      required final List<String> reviews})
+      : _reviews = reviews;
+
+  factory _$_CollectedVersions.fromJson(Map<String, dynamic> json) =>
+      _$$_CollectedVersionsFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String generation;
+  @override
+  final String initialEdit;
+  @override
+  final String finalEdit;
+  final List<String> _reviews;
+  @override
+  List<String> get reviews {
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviews);
+  }
+
+  @override
+  String toString() {
+    return 'CollectedVersions(id: $id, generation: $generation, initialEdit: $initialEdit, finalEdit: $finalEdit, reviews: $reviews)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CollectedVersions &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.generation, generation) ||
+                other.generation == generation) &&
+            (identical(other.initialEdit, initialEdit) ||
+                other.initialEdit == initialEdit) &&
+            (identical(other.finalEdit, finalEdit) ||
+                other.finalEdit == finalEdit) &&
+            const DeepCollectionEquality().equals(other._reviews, _reviews));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, generation, initialEdit,
+      finalEdit, const DeepCollectionEquality().hash(_reviews));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CollectedVersionsCopyWith<_$_CollectedVersions> get copyWith =>
+      __$$_CollectedVersionsCopyWithImpl<_$_CollectedVersions>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CollectedVersionsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CollectedVersions implements CollectedVersions {
+  factory _CollectedVersions(
+      {required final String id,
+      required final String generation,
+      required final String initialEdit,
+      required final String finalEdit,
+      required final List<String> reviews}) = _$_CollectedVersions;
+
+  factory _CollectedVersions.fromJson(Map<String, dynamic> json) =
+      _$_CollectedVersions.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get generation;
+  @override
+  String get initialEdit;
+  @override
+  String get finalEdit;
+  @override
+  List<String> get reviews;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CollectedVersionsCopyWith<_$_CollectedVersions> get copyWith =>
       throw _privateConstructorUsedError;
 }

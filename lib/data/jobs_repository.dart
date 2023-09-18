@@ -13,15 +13,33 @@ class JobsRepository {
   });
   final Dio client;
 
-  Future<Job> job({required String jobId}) async {
+  Future<CloudantDoc> job({required String docId}) async {
     final url = Uri(
       scheme: 'http',
       host: 'localhost',
       port: 3000,
-      path: 'get_document/$jobId',
+      path: 'get_job/$docId',
     ).toString();
     final response = await client.get(url);
-    return Job.fromJson(response.data);
+    return CloudantDoc.fromJson(response.data);
+  }
+
+  Future<CloudantDoc> submitFinalVersion(
+      {required String id,
+      required String submitter,
+      required DocumentVersion finalVersion}) async {
+    final url = Uri(
+      scheme: 'http',
+      host: 'localhost',
+      port: 3000,
+      path: '/submit_final_version/${finalVersion.id}',
+    ).toString();
+    final response = await client.post(url, data: {
+      "id": id,
+      "submitter": submitter,
+      "version": finalVersion,
+    });
+    return CloudantDoc.fromJson(response.data);
   }
 }
 
@@ -31,9 +49,9 @@ JobsRepository jobsRepository(JobsRepositoryRef ref) => JobsRepository(
     );
 
 @riverpod
-Future<Job> job(
+Future<CloudantDoc> job(
   JobRef ref, {
-  required String jobId,
+  required String docId,
 }) {
-  return ref.watch(jobsRepositoryProvider).job(jobId: jobId);
+  return ref.watch(jobsRepositoryProvider).job(docId: docId);
 }

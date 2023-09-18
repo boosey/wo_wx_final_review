@@ -8,26 +8,9 @@ part 'job.freezed.dart';
 part 'job.g.dart';
 
 @freezed
-class Job with _$Job {
-  factory Job({
-    @JsonKey(name: '_id') required String id,
-    @JsonKey(name: '_rev') required String rev,
-    // required DateTime timeStamp,
-    required int jobId,
-    required String jobTitle,
-    required String jobDescription,
-    required String jobSummary,
-    required String skillCategory,
-    required List<Skill> skills,
-    @Default([]) List<Reviewer> reviewers,
-  }) = _Job;
-
-  factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
-}
-
-@freezed
 class Skill with _$Skill {
   factory Skill({
+    required String id,
     required String name,
     required String description,
   }) = _Skill;
@@ -36,17 +19,132 @@ class Skill with _$Skill {
 }
 
 @freezed
-class Reviewer with _$Reviewer {
-  factory Reviewer({
-    required String reviewer,
-    required bool status,
-    required int rating,
-    required String jobSummary,
-    required String skillCategory,
+class SkillCategory with _$SkillCategory {
+  factory SkillCategory({
+    required String id,
+    required String name,
     required List<Skill> skills,
-    // required DateTime timeStamp,
-  }) = _Reviewer;
+  }) = _SkillCategory;
 
-  factory Reviewer.fromJson(Map<String, dynamic> json) =>
-      _$ReviewerFromJson(json);
+  factory SkillCategory.fromJson(Map<String, dynamic> json) =>
+      _$SkillCategoryFromJson(json);
+}
+
+@freezed
+class DocumentVersion with _$DocumentVersion {
+  factory DocumentVersion({
+    required String id,
+    @Default("") String author,
+    required bool submitted,
+    required int creationTime,
+    required int modificationTime,
+    required String jobSummary,
+    required List<SkillCategory> skillCategories,
+  }) = _DocumentVersion;
+
+  factory DocumentVersion.fromJson(Map<String, dynamic> json) =>
+      _$DocumentVersionFromJson(json);
+}
+
+@freezed
+class Versions with _$Versions {
+  factory Versions({
+    required DocumentVersion generation,
+    required DocumentVersion initialEdit,
+    required DocumentVersion finalEdit,
+    required List<DocumentVersion> reviews,
+  }) = _Versions;
+
+  factory Versions.fromJson(Map<String, dynamic> json) =>
+      _$VersionsFromJson(json);
+}
+
+@freezed
+class Input with _$Input {
+  factory Input({
+    @Default("") String submitter,
+    required String jobId,
+    required String jobTitle,
+    required String jobDescription,
+    required List<String> requestedSkillCategories,
+  }) = _Input;
+
+  factory Input.fromJson(Map<String, dynamic> json) => _$InputFromJson(json);
+}
+
+@freezed
+class CloudantDoc with _$CloudantDoc {
+  const CloudantDoc._();
+
+  factory CloudantDoc({
+    @JsonKey(name: '_id') required String id,
+    required int creationTime,
+    required int modificationTime,
+    required Input input,
+    required Versions versions,
+    required int generationRating,
+  }) = _CloudantDoc;
+
+  factory CloudantDoc.fromJson(Map<String, dynamic> json) =>
+      _$CloudantDocFromJson(json);
+
+  List<FieldReview> collectJobSummaryReviews() => versions.reviews
+      .map((r) => FieldReview(reviewer: r.author, review: r.jobSummary))
+      .toList(growable: false);
+
+  List<SkillReview> collectSkillReviews({
+    required String skillCategoryId,
+    required String skillId,
+  }) {
+    return versions.reviews
+        .map((r) {
+          return MapEntry(
+              r.author,
+              r.skillCategories
+                  .firstWhere((c) => c.id == skillCategoryId)
+                  .skills
+                  .firstWhere((s) => s.id == skillId));
+        })
+        .map(
+          (authorSkillMapEntry) => SkillReview(
+            reviewer: authorSkillMapEntry.key,
+            name: authorSkillMapEntry.value.name,
+            description: authorSkillMapEntry.value.description,
+          ),
+        )
+        .toList(growable: false);
+  }
+}
+
+class SkillReview {
+  final String reviewer;
+  final String name;
+  final String description;
+
+  SkillReview({
+    required this.reviewer,
+    required this.name,
+    required this.description,
+  });
+}
+
+class FieldReview {
+  final String reviewer;
+  final String review;
+
+  FieldReview({required this.reviewer, required this.review});
+}
+
+@freezed
+class CollectedVersions with _$CollectedVersions {
+  factory CollectedVersions({
+    required String id,
+    required String generation,
+    required String initialEdit,
+    required String finalEdit,
+    required List<String> reviews,
+  }) = _CollectedVersions;
+
+  factory CollectedVersions.fromJson(Map<String, dynamic> json) =>
+      _$CollectedVersionsFromJson(json);
 }

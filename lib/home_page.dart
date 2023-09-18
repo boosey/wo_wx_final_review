@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wo_wx_final_review/constants.dart';
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
 import 'package:wo_wx_final_review/providers/text_controller_provider.dart';
 import 'package:wo_wx_final_review/review.dart';
@@ -35,13 +34,13 @@ class HomePage extends ConsumerWidget {
                     SizedBox(
                       width: 400,
                       child: TextField(
-                        controller: ref.read(tecProvider(TextFieldId.jobId)),
+                        controller: ref.read(tecProvider("jobId")),
                         decoration: const InputDecoration(labelText: 'Job Id'),
                       ),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        final tec = ref.read(tecProvider(TextFieldId.jobId));
+                        final tec = ref.read(tecProvider("jobId"));
                         log('jobId: ${tec.text}');
                         ref.read(jobIdProvider.notifier).state = tec.text;
                       },
