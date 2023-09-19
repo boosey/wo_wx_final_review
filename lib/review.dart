@@ -75,9 +75,9 @@ class Review extends ConsumerWidget {
               skills: cat.skills
                   .map(
                     (s) => s.copyWith(
-                      name: ref.read(tecProvider('${s.id}.skill.name')).text,
+                      name: ref.read(tecProvider(skillNameTecId(s.id))).text,
                       description: ref
-                          .read(tecProvider('${s.id}.skill.description'))
+                          .read(tecProvider(skillDescriptionTecId(s.id)))
                           .text,
                     ),
                   )
@@ -93,6 +93,10 @@ class Review extends ConsumerWidget {
         );
   }
 
+  String skillDescriptionTecId(String skillId) => '$skillId.skill.description';
+
+  String skillNameTecId(String skillId) => '$skillId.skill.name';
+
   Widget jobDescriptionSection(CloudantDoc j) {
     return section("Job Description", () => Text(j.input.jobDescription));
   }
@@ -100,7 +104,7 @@ class Review extends ConsumerWidget {
   Widget jobSummarySection(WidgetRef ref, CloudantDoc j) {
     return section(
       "Job Summary",
-      () => simpleReviewSection(
+      () => jobSummaryReviewSection(
         ref: ref,
         fieldId: "jobSummary",
         initialValue: j.versions.finalEdit.jobSummary,
@@ -140,24 +144,33 @@ class Review extends ConsumerWidget {
         TextField(
           style: Constants.skillNameEditStyle,
           decoration: Constants.editInputDecoration,
-          controller: ref.read(TecProvider('${skill.id}.skill.name'))!
+          controller: ref.read(tecProvider(skillNameTecId(skill.id)))!
             ..text = skill.name,
         ),
         TextField(
           decoration: Constants.editInputDecoration,
           maxLines: 10,
           minLines: 1,
-          controller: ref.read(TecProvider('${skill.id}.skill.description'))!
+          controller: ref.read(TecProvider(skillDescriptionTecId(skill.id)))!
             ..text = skill.description,
         ),
         skillReviewsList(
-            reviews: job.collectSkillReviews(
-                skillCategoryId: category.id, skillId: skill.id)),
+          ref: ref,
+          skillId: skill.id,
+          reviews: job.collectSkillReviews(
+            skillCategoryId: category.id,
+            skillId: skill.id,
+          ),
+        ),
       ],
     );
   }
 
-  Widget skillReviewsList({required List<SkillReview> reviews}) {
+  Widget skillReviewsList({
+    required WidgetRef ref,
+    required String skillId,
+    required List<SkillReview> reviews,
+  }) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
       child: SignedSpacingColumn(
@@ -171,8 +184,32 @@ class Review extends ConsumerWidget {
                       r.reviewer,
                       style: Constants.reviewerStyle,
                     ),
-                    Text(r.name),
-                    Text(r.description),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            r.name,
+                            style: Constants.skillNameReviewStyle,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(child: Text(r.description)),
+                              IconButton(
+                                onPressed: () {
+                                  ref
+                                      .read(tecProvider(
+                                          skillDescriptionTecId(skillId)))
+                                      .text = r.description;
+                                },
+                                icon: const Icon(Icons.upload),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ))
             .toList(),
@@ -193,7 +230,7 @@ class Review extends ConsumerWidget {
     );
   }
 
-  Widget simpleReviewSection({
+  Widget jobSummaryReviewSection({
     required WidgetRef ref,
     required String fieldId,
     required String initialValue,
@@ -209,12 +246,12 @@ class Review extends ConsumerWidget {
           minLines: 3,
           controller: ref.read(tecProvider(fieldId))!..text = initialValue,
         ),
-        simpleReviewsList(reviews: reviews),
+        jobSummaryReviewsList(reviews: reviews),
       ],
     );
   }
 
-  Widget simpleReviewsList({List<FieldReview> reviews = const []}) {
+  Widget jobSummaryReviewsList({List<FieldReview> reviews = const []}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: SignedSpacingColumn(
