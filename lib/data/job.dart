@@ -96,7 +96,8 @@ class CloudantDoc with _$CloudantDoc {
     required String skillCategoryId,
     required String skillId,
   }) {
-    return versions.reviews
+    return (List.from(versions.reviews)
+          ..insert(0, versions.initialEdit.copyWith(author: "Initial Edit")))
         .map((r) {
           return MapEntry(
               r.author,

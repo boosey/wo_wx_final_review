@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wo_wx_final_review/providers/job_id_provider.dart';
 
 import 'home_page.dart';
 
-void main() {
+void main(List<String> args) {
+  final q = Uri.base.queryParameters;
+  // Global variable for job id sent in on the uri.
+  // This is the only place it should ever be set
+  // All other access should be through the provider - jobIdProvider
+  //
+  j = q.containsKey("job") ? q['job']! : "";
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -12,7 +19,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override
@@ -31,7 +40,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Job Information Consolidation'),
+      home: const HomePage(
+        title: 'Job Information Consolidation',
+        // job: job,
+      ),
     );
   }
 }

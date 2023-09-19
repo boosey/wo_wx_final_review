@@ -26,27 +26,31 @@ class HomePage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 400,
-                      child: TextField(
-                        controller: ref.read(tecProvider("jobId")),
-                        decoration: const InputDecoration(labelText: 'Job Id'),
+              Visibility(
+                visible: ref.read(jobIdProvider).isEmpty,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 400,
+                        child: TextField(
+                          controller: ref.read(tecProvider("jobId"))!,
+                          decoration:
+                              const InputDecoration(labelText: 'Job Id'),
+                        ),
                       ),
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-                        final tec = ref.read(tecProvider("jobId"));
-                        log('jobId: ${tec.text}');
-                        ref.read(jobIdProvider.notifier).state = tec.text;
-                      },
-                      child: const Text("Go"),
-                    ),
-                  ],
+                      MaterialButton(
+                        onPressed: () {
+                          final tec = ref.read(tecProvider("jobId"));
+                          log('jobId: ${tec.text}');
+                          ref.read(jobIdProvider.notifier).state = tec.text;
+                        },
+                        child: const Text("Go"),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const Review(),

@@ -5,6 +5,12 @@ class Constants {
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
+
+  static final skillCategoriesLabelStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.blue[800],
+  );
+
   static const reviewExpansionTitleStyle = TextStyle(
     fontWeight: FontWeight.bold,
   );
@@ -22,6 +28,15 @@ class Constants {
 
   static const skillNameEditStyle = TextStyle(
     fontWeight: FontWeight.bold,
+  );
+
+  static const submitFinalVersionButton = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  static final viewJobDescription = TextStyle(
+    color: Colors.blue[800],
   );
 
   static const editInputDecoration = InputDecoration(

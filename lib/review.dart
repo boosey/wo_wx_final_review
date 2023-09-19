@@ -34,18 +34,20 @@ class Review extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 10,
                 children: [
-                  MaterialButton(
-                    onPressed: () {
-                      saveFinalVersion(ref, j);
-                    },
-                    child: const Text("Save Final Version"),
-                  ),
                   jobDescriptionSection(j),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: saveButton(ref, j),
+                  ),
                   jobSummarySection(ref, j),
-                  const Text("Skills Categories",
-                      style: Constants.sectionTitleStyle),
+                  Text("Job Skills Categories",
+                      style: Constants.skillCategoriesLabelStyle),
                   ...j.versions.finalEdit.skillCategories.map(
                     (c) => skillCategorySection(ref, j, c),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: saveButton(ref, j),
                   ),
                 ],
               ),
@@ -58,6 +60,22 @@ class Review extends ConsumerWidget {
       ),
       error: (e, s) => Container(
         child: const Text("Error"),
+      ),
+    );
+  }
+
+  MaterialButton saveButton(WidgetRef ref, CloudantDoc j) {
+    return MaterialButton(
+      onPressed: () {
+        saveFinalVersion(ref, j);
+      },
+      color: Colors.blue[800],
+      child: const Padding(
+        padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+        child: Text(
+          "Submit Final Version",
+          style: Constants.submitFinalVersionButton,
+        ),
       ),
     );
   }
@@ -98,7 +116,18 @@ class Review extends ConsumerWidget {
   String skillNameTecId(String skillId) => '$skillId.skill.name';
 
   Widget jobDescriptionSection(CloudantDoc j) {
-    return section("Job Description", () => Text(j.input.jobDescription));
+    return ExpansionTile(
+      title: Text(
+        "View Provided Job Description",
+        style: Constants.viewJobDescription,
+      ),
+      childrenPadding: const EdgeInsets.all(20),
+      children: <Widget>[
+        Text(
+          j.input.jobDescription,
+        ),
+      ],
+    );
   }
 
   Widget jobSummarySection(WidgetRef ref, CloudantDoc j) {
@@ -144,15 +173,13 @@ class Review extends ConsumerWidget {
         TextField(
           style: Constants.skillNameEditStyle,
           decoration: Constants.editInputDecoration,
-          controller: ref.read(tecProvider(skillNameTecId(skill.id)))!
-            ..text = skill.name,
+          controller: ref.read(tecProvider(skillNameTecId(skill.id))),
         ),
         TextField(
           decoration: Constants.editInputDecoration,
           maxLines: 10,
           minLines: 1,
-          controller: ref.read(TecProvider(skillDescriptionTecId(skill.id)))!
-            ..text = skill.description,
+          controller: ref.read(TecProvider(skillDescriptionTecId(skill.id))),
         ),
         skillReviewsList(
           ref: ref,
@@ -184,35 +211,49 @@ class Review extends ConsumerWidget {
                       r.reviewer,
                       style: Constants.reviewerStyle,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            r.name,
-                            style: Constants.skillNameReviewStyle,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(child: Text(r.description)),
-                              IconButton(
-                                onPressed: () {
-                                  ref
-                                      .read(tecProvider(
-                                          skillDescriptionTecId(skillId)))
-                                      .text = r.description;
-                                },
-                                icon: const Icon(Icons.upload),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    skillReviewContent(r, ref, skillId),
                   ],
                 ))
             .toList(),
+      ),
+    );
+  }
+
+  Padding skillReviewContent(SkillReview r, WidgetRef ref, String skillId) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            r.name,
+            style: Constants.skillNameReviewStyle,
+          ),
+          Row(
+            children: [
+              Expanded(child: Text(r.description)),
+              IconButton(
+                onPressed: () {
+                  ref
+                      .read(
+                        tecProvider(
+                          skillNameTecId(skillId),
+                        ),
+                      )
+                      .text = r.name;
+                  ref
+                      .read(
+                        tecProvider(
+                          skillDescriptionTecId(skillId),
+                        ),
+                      )
+                      .text = r.description;
+                },
+                icon: const Icon(Icons.check_circle),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -244,14 +285,15 @@ class Review extends ConsumerWidget {
           decoration: Constants.editInputDecoration,
           maxLines: 100,
           minLines: 3,
-          controller: ref.read(tecProvider(fieldId))!..text = initialValue,
+          controller: ref.read(tecProvider(fieldId)),
         ),
-        jobSummaryReviewsList(reviews: reviews),
+        jobSummaryReviewsList(ref: ref, reviews: reviews),
       ],
     );
   }
 
-  Widget jobSummaryReviewsList({List<FieldReview> reviews = const []}) {
+  Widget jobSummaryReviewsList(
+      {required WidgetRef ref, List<FieldReview> reviews = const []}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: SignedSpacingColumn(
@@ -259,16 +301,35 @@ class Review extends ConsumerWidget {
         spacing: 15,
         children: reviews
             .map(
-              (r) => SignedSpacingColumn(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 5,
-                children: [
-                  Text(
-                    r.reviewer,
-                    style: Constants.reviewerStyle,
-                  ),
-                  Text(r.review),
-                ],
+              (r) => Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: SignedSpacingColumn(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 5,
+                  children: [
+                    Text(
+                      r.reviewer,
+                      style: Constants.reviewerStyle,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Text(r.review)),
+                        IconButton(
+                          onPressed: () {
+                            ref
+                                .read(
+                                  tecProvider(
+                                    "jobSummary",
+                                  ),
+                                )
+                                .text = r.review;
+                          },
+                          icon: const Icon(Icons.check_circle),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
             .toList(),
