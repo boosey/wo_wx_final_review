@@ -15,9 +15,9 @@ class JobsRepository {
 
   Future<CloudantDoc> job({required String docId}) async {
     final url = Uri(
-      scheme: 'http',
-      host: 'localhost',
-      port: 3000,
+      scheme: 'https',
+      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+      // port: 80,
       path: 'get_job/$docId',
     ).toString();
     final response = await client.get(url);
