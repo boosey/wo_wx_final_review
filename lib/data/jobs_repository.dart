@@ -12,15 +12,16 @@ class JobsRepository {
     required this.client,
   });
   final Dio client;
-  final Uri baseUri = Uri(scheme: 'https',
-      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
-      // scheme: 'http',
-      // host: 'localhost',
-      // port: 3000,);
+  final Uri baseUri = Uri(
+    scheme: 'https',
+    host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+    // scheme: 'http',
+    // host: 'localhost',
+    // port: 3000,);
   );
 
   Future<CloudantDoc> job({required String docId}) async {
-    final url = baseUri. Uri(
+    final url = Uri(
       scheme: 'https',
       host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
       // scheme: 'http',
@@ -36,7 +37,6 @@ class JobsRepository {
       {required String id,
       required String submitter,
       required DocumentVersion finalVersion}) async {
-    final u = Uri(); u.
     final url = Uri(
       scheme: 'https',
       host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
