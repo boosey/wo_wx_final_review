@@ -122,6 +122,105 @@ class CloudantDoc with _$CloudantDoc {
         )
         .toList(growable: false);
   }
+
+  List<SkillComparison> getSkillComparisons() {
+    return versions.finalEdit.skillCategories
+        .map(
+          (c) => c.skills.map(
+            (s) {
+              final genSkill = findSkill(versions.generation, c.id, s.id);
+
+              return SkillComparison(
+                categoryId: c.id,
+                skillId: s.id,
+                finalSkillName: s.name,
+                finalSkillDescription: s.description,
+                generatedSkillName: genSkill.name,
+                generatedSkillDescription: genSkill.description,
+              );
+            },
+          ).toList(),
+        )
+        .reduce((list, additionalItems) => list..addAll(additionalItems));
+  }
+
+  Skill findSkill(
+    DocumentVersion version,
+    String categoryId,
+    String skillId,
+  ) {
+    return version.skillCategories
+        .firstWhere(
+          (c) => c.id == categoryId,
+        )
+        .skills
+        .firstWhere(
+          (s) => s.id == skillId,
+        );
+  }
+
+  SkillComparison getSkillComparison(String categoryId, String skillId) {
+    final finalVersion = versions.finalEdit.skillCategories
+        .firstWhere(
+          (c) => c.id == categoryId,
+        )
+        .skills
+        .firstWhere(
+          (s) => s.id == skillId,
+        );
+    final generatedVersion = versions.generation.skillCategories
+        .firstWhere(
+          (c) => c.id == categoryId,
+        )
+        .skills
+        .firstWhere(
+          (s) => s.id == skillId,
+        );
+
+    return SkillComparison(
+      categoryId: categoryId,
+      skillId: skillId,
+      finalSkillName: finalVersion.name,
+      finalSkillDescription: finalVersion.description,
+      generatedSkillName: generatedVersion.name,
+      generatedSkillDescription: generatedVersion.description,
+    );
+  }
+
+  JobSummaryComparison getJobSummaryComparison() {
+    return JobSummaryComparison(
+      finalJobSummary: versions.finalEdit.jobSummary,
+      generatedJobSummary: versions.generation.jobSummary,
+    );
+  }
+}
+
+class JobSummaryComparison {
+  final String finalJobSummary;
+  final String generatedJobSummary;
+
+  JobSummaryComparison({
+    required this.finalJobSummary,
+    required this.generatedJobSummary,
+  });
+}
+
+class SkillComparison {
+  final String categoryId;
+  final String skillId;
+  final String finalSkillName;
+  final String finalSkillDescription;
+  final String generatedSkillName;
+  final String generatedSkillDescription;
+
+  SkillComparison({
+    required this.categoryId,
+    required this.skillId,
+    required this.finalSkillName,
+    required this.finalSkillDescription,
+    required this.generatedSkillName,
+    required this.generatedSkillDescription,
+  });
 }
 
 class SkillReview {

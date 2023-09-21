@@ -12,9 +12,15 @@ class JobsRepository {
     required this.client,
   });
   final Dio client;
+  final Uri baseUri = Uri(scheme: 'https',
+      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+      // scheme: 'http',
+      // host: 'localhost',
+      // port: 3000,);
+  );
 
   Future<CloudantDoc> job({required String docId}) async {
-    final url = Uri(
+    final url = baseUri. Uri(
       scheme: 'https',
       host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
       // scheme: 'http',
@@ -26,10 +32,11 @@ class JobsRepository {
     return CloudantDoc.fromJson(response.data);
   }
 
-  Future<CloudantDoc> submitFinalVersion(
+  Future<int> submitFinalVersion(
       {required String id,
       required String submitter,
       required DocumentVersion finalVersion}) async {
+    final u = Uri(); u.
     final url = Uri(
       scheme: 'https',
       host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
@@ -43,6 +50,20 @@ class JobsRepository {
       "submitter": submitter,
       "version": finalVersion,
     });
+    return response.statusCode!;
+  }
+
+  Future<CloudantDoc> submitRating(
+      {required String id, required int rating}) async {
+    final url = Uri(
+      scheme: 'https',
+      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+      // scheme: 'http',
+      // host: 'localhost',
+      // port: 3000,
+      path: '/submit_final_version/$id',
+    ).toString();
+    final response = await client.post(url, data: {"id": id, "rating": rating});
     return CloudantDoc.fromJson(response.data);
   }
 }

@@ -2,8 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
+import 'package:wo_wx_final_review/providers/page_provider.dart';
+
 import 'package:wo_wx_final_review/providers/text_controller_provider.dart';
+import 'package:wo_wx_final_review/rating.dart';
 import 'package:wo_wx_final_review/review.dart';
 
 class HomePage extends ConsumerWidget {
@@ -16,6 +20,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final visiblePage = ref.watch(visiblePageProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -53,7 +58,14 @@ class HomePage extends ConsumerWidget {
                   ),
                 ),
               ),
-              const Review(),
+              Visibility(
+                visible: visiblePage == VisiblePage.review,
+                child: const Review(),
+              ),
+              Visibility(
+                visible: visiblePage == VisiblePage.rating,
+                child: const DiffAndRating(),
+              )
             ],
           ),
         ),

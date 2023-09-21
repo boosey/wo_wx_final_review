@@ -5,7 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 import 'package:wo_wx_final_review/constants.dart';
 import 'package:wo_wx_final_review/data/job.dart';
+import 'package:wo_wx_final_review/job_base_widget.dart';
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
+import 'package:wo_wx_final_review/providers/page_provider.dart';
 import 'package:wo_wx_final_review/providers/text_controller_provider.dart';
 
 import 'data/jobs_repository.dart';
@@ -17,66 +19,17 @@ class Review extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final jobDocumentId = ref.watch(jobIdProvider);
-    final job = ref.watch(jobProvider(docId: jobDocumentId));
+    final job = ref.watch(jobProvider(docId: ref.watch(jobIdProvider)));
 
     return job.when(
-      data: (j) => SizedBox(
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: Padding(
-          padding: const EdgeInsets.all(100),
-          child: SignedSpacingColumn(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              Text(j.input.jobTitle, style: Constants.jobTitleStyle),
-              SignedSpacingColumn(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 10,
-                children: [
-                  jobDescriptionSection(j),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: saveButton(ref, j),
-                  ),
-                  jobSummarySection(ref, j),
-                  Text("Job Skills Categories",
-                      style: Constants.skillCategoriesLabelStyle),
-                  ...j.versions.finalEdit.skillCategories.map(
-                    (c) => skillCategorySection(ref, j, c),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: saveButton(ref, j),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      loading: () => Container(
-        child: const Text("Loading"),
-      ),
-      error: (e, s) => Container(
-        child: const Text("Error"),
-      ),
-    );
-  }
-
-  MaterialButton saveButton(WidgetRef ref, CloudantDoc j) {
-    return MaterialButton(
-      onPressed: () {
-        saveFinalVersion(ref, j);
-      },
-      color: Colors.blue[800],
-      child: const Padding(
-        padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-        child: Text(
-          "Submit Final Version",
-          style: Constants.submitFinalVersionButton,
-        ),
-      ),
+      data: (job) => JobBaseWidget(
+          job: job,
+          submitButtonText: "Save Final Version",
+          submitAction: () => saveFinalVersion(ref, job),
+          jobSummarySection: () => jobSummarySection(ref, job),
+          skillSection: skillReviewSection),
+      loading: () => Container(),
+      error: (e, s) => Container(),
     );
   }
 
@@ -109,57 +62,21 @@ class Review extends ConsumerWidget {
           submitter: "cassie@delta.com",
           finalVersion: finalVersion,
         );
+
+    ref.read(visiblePageProvider.notifier).state = VisiblePage.rating;
   }
 
   String skillDescriptionTecId(String skillId) => '$skillId.skill.description';
 
   String skillNameTecId(String skillId) => '$skillId.skill.name';
 
-  Widget jobDescriptionSection(CloudantDoc j) {
-    return ExpansionTile(
-      title: Text(
-        "View Provided Job Description",
-        style: Constants.viewJobDescription,
-      ),
-      childrenPadding: const EdgeInsets.all(20),
-      children: <Widget>[
-        Text(
-          j.input.jobDescription,
-        ),
-      ],
-    );
-  }
-
   Widget jobSummarySection(WidgetRef ref, CloudantDoc j) {
-    return section(
-      "Job Summary",
-      () => jobSummaryReviewSection(
-        ref: ref,
-        fieldId: "jobSummary",
-        initialValue: j.versions.finalEdit.submitted
-            ? j.versions.finalEdit.jobSummary
-            : "",
-        reviews: j.collectJobSummaryReviews(),
-      ),
-    );
-  }
-
-  Widget skillCategorySection(WidgetRef ref, job, SkillCategory category) {
-    return section(
-      category.name,
-      () => SignedSpacingColumn(
-        spacing: 40,
-        children: category.skills
-            .map(
-              (skill) => skillReviewSection(
-                ref: ref,
-                job: job,
-                category: category,
-                skill: skill,
-              ),
-            )
-            .toList(),
-      ),
+    return jobSummaryReviewSection(
+      ref: ref,
+      fieldId: "jobSummary",
+      initialValue:
+          j.versions.finalEdit.submitted ? j.versions.finalEdit.jobSummary : "",
+      reviews: j.collectJobSummaryReviews(),
     );
   }
 
@@ -257,19 +174,6 @@ class Review extends ConsumerWidget {
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget section(String sectionTitle, Widget Function() contents) {
-    return DecoratedBox(
-      decoration: BoxDecoration(border: Border.all()),
-      child: ExpansionTile(
-        title: Text(sectionTitle, style: Constants.sectionTitleStyle),
-        childrenPadding: const EdgeInsets.all(20),
-        children: <Widget>[
-          contents.call(),
         ],
       ),
     );

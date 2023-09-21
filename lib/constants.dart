@@ -39,6 +39,15 @@ class Constants {
     color: Colors.blue[800],
   );
 
+  static final deletedTextStyle = TextStyle(
+    backgroundColor: Colors.grey[300],
+    decoration: TextDecoration.lineThrough,
+  );
+
+  static final addedTextStyle = TextStyle(
+    backgroundColor: Colors.green[100],
+  );
+
   static const editInputDecoration = InputDecoration(
     border: OutlineInputBorder(),
   );
