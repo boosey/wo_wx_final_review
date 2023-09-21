@@ -17,7 +17,9 @@ class JobsRepository {
     final url = Uri(
       scheme: 'https',
       host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
-      // port: 80,
+      // scheme: 'http',
+      // host: 'localhost',
+      // port: 3000,
       path: 'get_job/$docId',
     ).toString();
     final response = await client.get(url);
@@ -29,9 +31,11 @@ class JobsRepository {
       required String submitter,
       required DocumentVersion finalVersion}) async {
     final url = Uri(
-      scheme: 'http',
-      host: 'localhost',
-      port: 3000,
+      scheme: 'https',
+      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+      // scheme: 'http',
+      // host: 'localhost',
+      // port: 3000,
       path: '/submit_final_version/${finalVersion.id}',
     ).toString();
     final response = await client.post(url, data: {

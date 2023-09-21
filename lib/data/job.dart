@@ -88,16 +88,23 @@ class CloudantDoc with _$CloudantDoc {
   factory CloudantDoc.fromJson(Map<String, dynamic> json) =>
       _$CloudantDocFromJson(json);
 
-  List<FieldReview> collectJobSummaryReviews() => versions.reviews
-      .map((r) => FieldReview(reviewer: r.author, review: r.jobSummary))
+  List<DocumentVersion> collectEditedVersions() => List.from(versions.reviews)
+    ..insert(0, versions.initialEdit.copyWith(author: "Initial Edit"));
+
+  List<FieldReview> collectJobSummaryReviews() => collectEditedVersions()
+      .map(
+        (r) => FieldReview(
+          reviewer: r.author,
+          review: r.jobSummary,
+        ),
+      )
       .toList(growable: false);
 
   List<SkillReview> collectSkillReviews({
     required String skillCategoryId,
     required String skillId,
   }) {
-    return (List.from(versions.reviews)
-          ..insert(0, versions.initialEdit.copyWith(author: "Initial Edit")))
+    return collectEditedVersions()
         .map((r) {
           return MapEntry(
               r.author,

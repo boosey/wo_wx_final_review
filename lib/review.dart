@@ -136,7 +136,9 @@ class Review extends ConsumerWidget {
       () => jobSummaryReviewSection(
         ref: ref,
         fieldId: "jobSummary",
-        initialValue: j.versions.finalEdit.jobSummary,
+        initialValue: j.versions.finalEdit.submitted
+            ? j.versions.finalEdit.jobSummary
+            : "",
         reviews: j.collectJobSummaryReviews(),
       ),
     );
@@ -173,13 +175,15 @@ class Review extends ConsumerWidget {
         TextField(
           style: Constants.skillNameEditStyle,
           decoration: Constants.editInputDecoration,
-          controller: ref.read(tecProvider(skillNameTecId(skill.id))),
+          controller: ref.read(tecProvider(skillNameTecId(skill.id)))!
+            ..text = job.versions.finalEdit.submitted ? skill.name : "",
         ),
         TextField(
           decoration: Constants.editInputDecoration,
           maxLines: 10,
           minLines: 1,
-          controller: ref.read(TecProvider(skillDescriptionTecId(skill.id))),
+          controller: ref.read(TecProvider(skillDescriptionTecId(skill.id)))!
+            ..text = job.versions.finalEdit.submitted ? skill.description : "",
         ),
         skillReviewsList(
           ref: ref,
@@ -285,7 +289,7 @@ class Review extends ConsumerWidget {
           decoration: Constants.editInputDecoration,
           maxLines: 100,
           minLines: 3,
-          controller: ref.read(tecProvider(fieldId)),
+          controller: ref.read(tecProvider(fieldId))!..text = initialValue,
         ),
         jobSummaryReviewsList(ref: ref, reviews: reviews),
       ],
