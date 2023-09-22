@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
-
 import 'constants.dart';
 import 'data/job.dart';
 
 class JobBaseWidget extends ConsumerWidget {
-  const JobBaseWidget({
+  JobBaseWidget({
     super.key,
+    required this.pageTitle,
     required this.job,
     required this.submitButtonText,
     required this.submitAction,
     required this.jobSummarySection,
     required this.skillSection,
-  });
+    this.showMessage = false,
+    Widget? message,
+    Widget? ratingBar,
+  }) {
+    _message = message ?? Container();
+    _ratingBar = ratingBar ?? Container();
+  }
 
+  late final Widget _ratingBar;
+  late final Widget _message;
+  final bool showMessage;
+  final String pageTitle;
   final CloudantDoc job;
   final String submitButtonText;
   final void Function() submitAction;
@@ -36,26 +46,32 @@ class JobBaseWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 10,
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                pageTitle,
+                style: Constants.pageTitleStyle,
+              ),
+            ),
             Text(job.input.jobTitle, style: Constants.jobTitleStyle),
             SignedSpacingColumn(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
               children: [
                 jobDescriptionSection(job),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: submitButton(ref, job),
+                Visibility(
+                  visible: showMessage,
+                  child: _message,
                 ),
+                _ratingBar,
+                submitButtonVisibility(ref, job),
                 jobSummarySectionBase(ref),
                 Text("Job Skills Categories",
                     style: Constants.skillCategoriesLabelStyle),
                 ...job.versions.finalEdit.skillCategories.map(
                   (c) => skillCategorySection(ref, job, c),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: submitButton(ref, job),
-                ),
+                submitButtonVisibility(ref, job),
               ],
             ),
           ],
@@ -64,11 +80,24 @@ class JobBaseWidget extends ConsumerWidget {
     );
   }
 
+  Widget submitButtonVisibility(
+    WidgetRef ref,
+    CloudantDoc job,
+  ) {
+    return Visibility(
+      visible: !showMessage,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: submitButton(ref, job),
+      ),
+    );
+  }
+
   Widget jobDescriptionSection(CloudantDoc j) {
     return ExpansionTile(
       title: Text(
         "View Provided Job Description",
-        style: Constants.viewJobDescription,
+        style: Constants.viewJobDescriptionStyle,
       ),
       childrenPadding: const EdgeInsets.all(20),
       children: <Widget>[
@@ -128,7 +157,7 @@ class JobBaseWidget extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
         child: Text(
           submitButtonText,
-          style: Constants.submitFinalVersionButton,
+          style: Constants.buttonStyle,
         ),
       ),
     );

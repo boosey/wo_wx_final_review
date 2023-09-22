@@ -18,6 +18,10 @@ class Constants {
     fontWeight: FontWeight.bold,
     fontSize: 24,
   );
+  static const pageTitleStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 30,
+  );
   static const reviewerStyle = TextStyle(
     fontWeight: FontWeight.bold,
   );
@@ -30,12 +34,12 @@ class Constants {
     fontWeight: FontWeight.bold,
   );
 
-  static const submitFinalVersionButton = TextStyle(
+  static const buttonStyle = TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
 
-  static final viewJobDescription = TextStyle(
+  static final viewJobDescriptionStyle = TextStyle(
     color: Colors.blue[800],
   );
 

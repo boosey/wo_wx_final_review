@@ -1,9 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_diff_text/pretty_diff_text.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 import 'package:wo_wx_final_review/constants.dart';
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
+import 'package:wo_wx_final_review/providers/page_provider.dart';
+import 'package:wo_wx_final_review/providers/rating_provider.dart';
+import 'package:wo_wx_final_review/providers/saved_state_providers.dart';
 
 import 'data/job.dart';
 import 'data/jobs_repository.dart';
@@ -17,10 +23,15 @@ class DiffAndRating extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
   ) {
+    final saved = ref.watch(ratingSavedProvider);
     final job = ref.watch(jobProvider(docId: ref.watch(jobIdProvider)));
 
     return job.when(
       data: (job) => JobBaseWidget(
+        pageTitle: "Rate Generated Version",
+        message: savedMessage(ref),
+        showMessage: saved,
+        ratingBar: ratingBar(ref, job),
         job: job,
         submitButtonText: "Save Rating",
         submitAction: () => saveRating(ref, job),
@@ -32,11 +43,55 @@ class DiffAndRating extends ConsumerWidget {
     );
   }
 
+  Widget ratingBar(WidgetRef ref, CloudantDoc job) {
+    return Center(
+      child: RatingBar.builder(
+        initialRating: max(1, job.generationRating.toDouble()),
+        minRating: 1,
+        direction: Axis.horizontal,
+        allowHalfRating: false,
+        itemCount: 5,
+        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+        itemBuilder: (context, _) => const Icon(
+          Icons.star,
+          color: Colors.amber,
+        ),
+        onRatingUpdate: (rating) {
+          ref.read(ratingProvider.notifier).state = rating.toInt();
+        },
+      ),
+    );
+  }
+
+  Widget savedMessage(WidgetRef ref) {
+    return Row(
+      children: [
+        const Text("The rating has been saved. Thank you."),
+        TextButton(
+          onPressed: () =>
+              ref.read(visiblePageProvider.notifier).state = VisiblePage.done,
+          child: Container(
+            color: Colors.blue[700],
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Done",
+                style: Constants.buttonStyle,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<void> saveRating(WidgetRef ref, CloudantDoc job) async {
     await ref.read(jobsRepositoryProvider).submitRating(
           id: job.id,
-          rating: job.generationRating,
+          rating: ref.read(ratingProvider),
         );
+
+    ref.read(ratingSavedProvider.notifier).state = true;
   }
 
   Widget jobSummarySection(WidgetRef ref, CloudantDoc j) {

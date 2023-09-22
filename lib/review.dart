@@ -6,6 +6,7 @@ import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 import 'package:wo_wx_final_review/constants.dart';
 import 'package:wo_wx_final_review/data/job.dart';
 import 'package:wo_wx_final_review/job_base_widget.dart';
+import 'package:wo_wx_final_review/providers/saved_state_providers.dart';
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
 import 'package:wo_wx_final_review/providers/page_provider.dart';
 import 'package:wo_wx_final_review/providers/text_controller_provider.dart';
@@ -20,9 +21,13 @@ class Review extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final job = ref.watch(jobProvider(docId: ref.watch(jobIdProvider)));
+    final saved = ref.watch(finalEditSavedProvider);
 
     return job.when(
       data: (job) => JobBaseWidget(
+          pageTitle: "Review and Submit Final Edits",
+          message: savedMessage(ref),
+          showMessage: saved,
           job: job,
           submitButtonText: "Save Final Version",
           submitAction: () => saveFinalVersion(ref, job),
@@ -30,6 +35,29 @@ class Review extends ConsumerWidget {
           skillSection: skillReviewSection),
       loading: () => Container(),
       error: (e, s) => Container(),
+    );
+  }
+
+  Widget savedMessage(WidgetRef ref) {
+    return Row(
+      children: [
+        const Text(
+            "Final Edits have been saved. Would you like to provide a rating of the generated output?"),
+        TextButton(
+          onPressed: () =>
+              ref.read(visiblePageProvider.notifier).state = VisiblePage.rating,
+          child: Container(
+            color: Colors.blue[700],
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Rate Output",
+                style: Constants.buttonStyle,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -63,7 +91,12 @@ class Review extends ConsumerWidget {
           finalVersion: finalVersion,
         );
 
-    ref.read(visiblePageProvider.notifier).state = VisiblePage.rating;
+    // ref.read(jobIdProvider.notifier).state = job.id;
+    // ref.read(jobProvider(docId: job.id).future).
+
+    // ignore: unused_result
+    ref.invalidate(jobProvider(docId: job.id));
+    ref.read(finalEditSavedProvider.notifier).state = true;
   }
 
   String skillDescriptionTecId(String skillId) => '$skillId.skill.description';

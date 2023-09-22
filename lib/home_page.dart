@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wo_wx_final_review/constants.dart';
 
 import 'package:wo_wx_final_review/providers/job_id_provider.dart';
 import 'package:wo_wx_final_review/providers/page_provider.dart';
@@ -65,7 +66,19 @@ class HomePage extends ConsumerWidget {
               Visibility(
                 visible: visiblePage == VisiblePage.rating,
                 child: const DiffAndRating(),
-              )
+              ),
+              Visibility(
+                visible: visiblePage == VisiblePage.done,
+                child: const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 100),
+                    child: Text(
+                      "Thank You",
+                      style: Constants.pageTitleStyle,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
