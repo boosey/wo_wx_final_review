@@ -43,7 +43,6 @@ dependencies:
   pretty_diff_text: ^1.0.0
   fluttertoast: ^8.2.2
   motion_toast: ^2.7.8
-  rating_bar: ^0.2.0
   flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
