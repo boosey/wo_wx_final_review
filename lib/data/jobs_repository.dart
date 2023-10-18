@@ -16,7 +16,7 @@ class JobsRepository {
   String buildUri({required String path}) {
     return Uri(
       scheme: 'https',
-      host: 'application-a7.17dj2halxyuf.us-south.codeengine.appdomain.cloud',
+      host: 'application-ed.18g7dycn3zc4.us-south.codeengine.appdomain.cloud',
       // scheme: 'http',
       // host: 'localhost',
       // port: 3000,
