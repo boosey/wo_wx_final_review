@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:stable
 
 # copy the info of the builded web app to nginx
 COPY ./build/web /usr/share/nginx/html
